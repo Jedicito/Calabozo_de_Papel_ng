@@ -1,0 +1,55 @@
+<ng-container *ngIf="juego; else noEncontrado">
+
+  <header class="category-hero" role="banner">
+    <span class="category-icon" aria-hidden="true">🎲</span>
+    <h1 class="category-title">{{ juego.nombre }}</h1>
+    <p class="category-subtitle">{{ juego.categoria | titlecase }}</p>
+  </header>
+
+  <main class="main-content" id="main" style="max-width: 900px;">
+
+    <div class="game-detail-wrap">
+
+      <div class="game-detail-img-col">
+        <div class="game-card-img-wrap" style="border-radius: var(--r-md); overflow: hidden;">
+          <img [src]="juego.foto" [alt]="juego.nombre" style="width: 100%; height: auto;"/>
+          <span *ngIf="juego.tieneDescuento" class="badge badge-discount badge-corner" aria-label="Con descuento">🏷 Oferta</span>
+        </div>
+      </div>
+
+      <div class="game-detail-info-col">
+        <p class="section-label">{{ juego.categoria | titlecase }}</p>
+        <h2 class="section-title" style="margin-bottom: 1rem;">{{ juego.nombre }}</h2>
+
+        <p class="game-desc" style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          {{ juego.descripcion }}
+        </p>
+
+        <div class="game-card-footer" style="margin-bottom: 1.5rem;">
+          <span class="game-price" style="font-size: 2rem;">{{ formatearPrecio(juego.precio) }}</span>
+          <span *ngIf="juego.tieneDescuento" class="badge badge-discount" aria-label="Con descuento">✔ Con Descuento</span>
+          <span *ngIf="!juego.tieneDescuento" class="badge badge-no-discount" aria-label="Sin descuento">✖ Sin Descuento</span>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-submit" (click)="volver()">← Volver a la categoría</button>
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="divider-gold" aria-hidden="true" />
+    <div class="ornament" aria-hidden="true">✦ ✦ ✦</div>
+
+  </main>
+
+</ng-container>
+
+<ng-template #noEncontrado>
+  <main class="main-content" id="main" style="text-align: center; padding-top: 4rem;">
+    <div class="empty-state">
+      <p>⚠ Juego no encontrado.</p>
+      <a routerLink="/" class="btn-submit" style="display: inline-block; margin-top: 1rem;">← Volver al inicio</a>
+    </div>
+  </main>
+</ng-template>

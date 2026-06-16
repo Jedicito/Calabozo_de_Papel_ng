@@ -1,0 +1,119 @@
+<header class="form-hero">
+  <span class="form-hero-icon" aria-hidden="true">👤</span>
+  <h1 class="category-title">Mi Perfil</h1>
+  <p class="category-subtitle">Actualiza tus datos de aventurero</p>
+</header>
+
+<main class="form-wrapper" id="main">
+  <div class="form-card">
+
+    <div *ngIf="mensajeExito" class="success-banner" role="alert" style="padding: 1rem; margin-bottom: 1rem; text-align: center;">
+      {{ mensajeExito }}
+    </div>
+
+    <!-- Datos personales -->
+    <p class="section-label" style="margin-bottom:var(--sp-md);">Datos personales</p>
+    <div class="row">
+
+      <div class="col-12 campo-grupo">
+        <label for="p-nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="p-nombre" class="campo-input"
+               placeholder="Tu nombre completo"
+               [(ngModel)]="nombre" name="nombre" autocomplete="name"/>
+      </div>
+
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="p-usuario">Nombre de usuario</label>
+        <input type="text" id="p-usuario" class="campo-input"
+               [value]="usuario" disabled
+               style="opacity: 0.6; cursor: not-allowed;"/>
+        <span class="campo-hint">El nombre de usuario no se puede cambiar.</span>
+      </div>
+
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="p-email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+        <input type="email" id="p-email" class="campo-input"
+               placeholder="tu@correo.cl"
+               [(ngModel)]="email" name="email" autocomplete="email"/>
+      </div>
+
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="p-nacimiento">Fecha de nacimiento</label>
+        <input type="date" id="p-nacimiento" class="campo-input"
+               [(ngModel)]="fechaNacimiento" name="fechaNacimiento" autocomplete="bday"/>
+      </div>
+
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="p-direccion">
+          Dirección de despacho
+          <span class="campo-opcional-tag" aria-label="campo opcional">Opcional</span>
+        </label>
+        <input type="text" id="p-direccion" class="campo-input"
+               placeholder="Calle, número, ciudad…"
+               [(ngModel)]="direccion" name="direccion" autocomplete="street-address"/>
+      </div>
+
+    </div>
+
+    <hr class="form-divider" aria-hidden="true"/>
+
+    <!-- Cambiar contraseña -->
+    <p class="section-label" style="margin-bottom:var(--sp-xs);">Cambiar contraseña</p>
+    <p class="campo-hint" style="margin-bottom:var(--sp-md);">
+      Deja estos campos vacíos si no deseas cambiar tu contraseña.
+    </p>
+    <div class="row">
+
+      <div class="col-12 col-md-4 campo-grupo">
+        <label for="p-clave-actual">Contraseña actual</label>
+        <div class="input-pass-wrap">
+          <input [type]="mostrarActual ? 'text' : 'password'"
+                 id="p-clave-actual" class="campo-input"
+                 placeholder="••••••••" maxlength="18"
+                 [(ngModel)]="claveActual" name="claveActual" autocomplete="current-password"/>
+          <button type="button" class="btn-toggle-pass" (click)="mostrarActual = !mostrarActual" aria-label="Mostrar contraseña">
+            <span class="icono-ojo" aria-hidden="true">{{ mostrarActual ? '👁' : '🙈' }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4 campo-grupo">
+        <label for="p-clave-nueva">Nueva contraseña</label>
+        <div class="input-pass-wrap">
+          <input [type]="mostrarNueva ? 'text' : 'password'"
+                 id="p-clave-nueva" class="campo-input"
+                 placeholder="••••••••" maxlength="18"
+                 [(ngModel)]="claveNueva" name="claveNueva" autocomplete="new-password"/>
+          <button type="button" class="btn-toggle-pass" (click)="mostrarNueva = !mostrarNueva" aria-label="Mostrar contraseña">
+            <span class="icono-ojo" aria-hidden="true">{{ mostrarNueva ? '👁' : '🙈' }}</span>
+          </button>
+        </div>
+        <span class="campo-hint">6–18 car., mayúscula, número y carácter especial.</span>
+      </div>
+
+      <div class="col-12 col-md-4 campo-grupo">
+        <label for="p-clave-repetir">Repetir nueva contraseña</label>
+        <div class="input-pass-wrap">
+          <input [type]="mostrarRepetir ? 'text' : 'password'"
+                 id="p-clave-repetir" class="campo-input"
+                 placeholder="••••••••" maxlength="18"
+                 [(ngModel)]="claveRepetir" name="claveRepetir" autocomplete="new-password"/>
+          <button type="button" class="btn-toggle-pass" (click)="mostrarRepetir = !mostrarRepetir" aria-label="Mostrar contraseña">
+            <span class="icono-ojo" aria-hidden="true">{{ mostrarRepetir ? '👁' : '🙈' }}</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="font-size:0.78rem; color:var(--clr-text-muted); margin-top:var(--sp-sm);">
+      <span style="color:var(--clr-amber);">*</span> Campos obligatorios
+    </p>
+
+    <div class="form-actions">
+      <button class="btn-submit" (click)="guardarCambios()">✔ Guardar cambios</button>
+      <button type="button" class="btn-clear" (click)="cancelar()">✖ Cancelar</button>
+    </div>
+
+  </div>
+</main>

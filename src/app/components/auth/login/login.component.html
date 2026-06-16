@@ -1,0 +1,52 @@
+<header class="form-hero">
+  <span class="form-hero-icon" aria-hidden="true">🔑</span>
+  <h1 class="category-title">Iniciar Sesión</h1>
+  <p class="category-subtitle">Accede a tu cuenta del Calabozo</p>
+</header>
+
+<main class="form-wrapper" id="main">
+  <div class="form-card">
+
+    <div class="campo-grupo">
+      <label for="login-usuario">Usuario o correo <span class="req" aria-hidden="true">*</span></label>
+      <input type="text" id="login-usuario" class="campo-input"
+             placeholder="tu_usuario o tu@correo.cl"
+             [(ngModel)]="usuario" name="usuario"
+             autocomplete="username"/>
+    </div>
+
+    <div class="campo-grupo">
+      <label for="login-clave">Contraseña <span class="req" aria-hidden="true">*</span></label>
+      <div class="input-pass-wrap">
+        <input [type]="mostrarContrasena ? 'text' : 'password'"
+               id="login-clave" class="campo-input"
+               placeholder="••••••••"
+               [(ngModel)]="contrasena" name="contrasena"
+               autocomplete="current-password"/>
+        <button type="button" class="btn-toggle-pass"
+                (click)="toggleContrasena()"
+                aria-label="Mostrar contraseña">
+          <span class="icono-ojo" aria-hidden="true">{{ mostrarContrasena ? '👁' : '🙈' }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="errorGeneral" class="alert-error-box" role="alert">
+      {{ errorGeneral }}
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-submit" (click)="onSubmit()">⚔ Ingresar</button>
+    </div>
+
+    <div class="form-links-group">
+      <a routerLink="/recuperar" class="form-link-secondary">¿Olvidaste tu contraseña?</a>
+    </div>
+
+    <hr class="form-divider" aria-hidden="true"/>
+    <p class="form-footer-link">
+      ¿Aún no tienes cuenta? <a routerLink="/registro">Crear cuenta</a>
+    </p>
+
+  </div>
+</main>

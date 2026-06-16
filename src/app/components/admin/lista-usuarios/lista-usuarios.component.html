@@ -1,0 +1,94 @@
+<header class="form-hero">
+  <span class="form-hero-icon" aria-hidden="true">🛡️</span>
+  <h1 class="category-title">Panel de Administración</h1>
+  <p class="category-subtitle">Gestión de usuarios registrados</p>
+</header>
+
+<main class="main-content" id="main" style="max-width:1300px;">
+
+  <!-- Modal de confirmación (controlado con *ngIf) -->
+  <div *ngIf="mostrarModalEliminar" class="modal-overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; display:flex; align-items:center; justify-content:center;">
+    <div class="modal-content admin-modal-content" style="max-width: 480px; width: 90%; padding: 2rem;">
+      <div class="modal-header admin-modal-header" style="margin-bottom: 1.5rem;">
+        <h5 class="modal-title">⚠ Confirmar eliminación</h5>
+      </div>
+      <div class="modal-body" style="margin-bottom: 1.5rem;">
+        <p>¿Estás seguro de que deseas eliminar al usuario <strong>{{ nombreAEliminar }}</strong>?</p>
+        <p class="campo-hint">Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-footer admin-modal-footer" style="display:flex; gap: 1rem; justify-content: flex-end;">
+        <button type="button" class="btn-clear" (click)="cancelarEliminar()">Cancelar</button>
+        <button type="button" class="btn-submit btn-danger-submit" (click)="eliminarUsuario()">Eliminar usuario</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-header-bar">
+    <div>
+      <p class="section-label">Gestión</p>
+      <h2 class="section-title" style="margin-bottom:0;">Usuarios Registrados</h2>
+    </div>
+    <div class="admin-badge">{{ usuariosFiltrados.length }} usuario{{ usuariosFiltrados.length !== 1 ? 's' : '' }}</div>
+  </div>
+
+  <!-- Buscador -->
+  <div class="admin-search-wrap">
+    <input type="text" class="campo-input admin-search-input"
+           placeholder="🔍 Buscar por nombre, usuario o correo…"
+           [(ngModel)]="textoBuscador"
+           (ngModelChange)="filtrar()"
+           aria-label="Buscar usuarios"/>
+  </div>
+
+  <!-- Tabla -->
+  <div *ngIf="usuariosFiltrados.length > 0" class="admin-table-wrap">
+    <table class="admin-table" aria-label="Lista de usuarios">
+      <thead>
+        <tr>
+          <th scope="col">Usuario</th>
+          <th scope="col">Nombre completo</th>
+          <th scope="col">Correo</th>
+          <th scope="col">Fecha nac.</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">Registro</th>
+          <th scope="col">Tipo</th>
+          <th scope="col" class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of usuariosFiltrados">
+          <td>{{ u.usuario }}</td>
+          <td>{{ u.nombre }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.fechaNacimiento || '—' }}</td>
+          <td>{{ u.direccion || '—' }}</td>
+          <td>{{ u.fechaRegistro || '—' }}</td>
+          <td>
+            <span *ngIf="u.tipoUsuario === 'admin'" class="badge badge-discount">Admin</span>
+            <span *ngIf="u.tipoUsuario === 'cliente'" class="badge badge-no-discount">Cliente</span>
+          </td>
+          <td class="text-center">
+            <button *ngIf="u.tipoUsuario !== 'admin'"
+                    class="btn-clear"
+                    style="font-size: 0.8rem; padding: 0.3em 0.7em;"
+                    (click)="confirmarEliminar(u)">
+              🗑 Eliminar
+            </button>
+            <span *ngIf="u.tipoUsuario === 'admin'" class="campo-hint">—</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Estado vacío -->
+  <div *ngIf="usuarios.length === 0" class="empty-state">
+    <p>🧙 No hay usuarios registrados todavía.</p>
+  </div>
+
+  <!-- Sin resultados en búsqueda -->
+  <div *ngIf="usuarios.length > 0 && usuariosFiltrados.length === 0" class="empty-state">
+    <p>🔍 Ningún usuario coincide con la búsqueda.</p>
+  </div>
+
+</main>

@@ -1,0 +1,55 @@
+<ng-container *ngIf="categoria">
+
+  <header class="category-hero" role="banner">
+    <span class="category-icon" aria-hidden="true">{{ categoria.icono }}</span>
+    <h1 class="category-title">{{ categoria.nombre }}</h1>
+    <p class="category-subtitle">{{ categoria.subtitulo }}</p>
+  </header>
+
+  <main class="main-content" id="main">
+
+    <p class="section-label">Catálogo</p>
+    <h2 class="section-title">Juegos Disponibles</h2>
+
+    <div class="games-grid" role="list">
+
+      <article *ngFor="let juego of juegos" class="game-card" role="listitem">
+        <div class="game-card-img-wrap">
+          <img [src]="juego.foto" [alt]="juego.nombre + ' — juego de mesa'" loading="lazy"/>
+          <span *ngIf="juego.tieneDescuento" class="badge badge-discount badge-corner" aria-label="Con descuento">🏷 Oferta</span>
+        </div>
+        <div class="game-card-body">
+          <h3 class="game-name">{{ juego.nombre }}</h3>
+          <p class="game-desc">{{ juego.descripcion }}</p>
+          <div class="game-card-footer">
+            <span class="game-price">{{ formatearPrecio(juego.precio) }}</span>
+            <span *ngIf="juego.tieneDescuento" class="badge badge-discount" aria-label="Con descuento">✔ Con Descuento</span>
+            <span *ngIf="!juego.tieneDescuento" class="badge badge-no-discount" aria-label="Sin descuento">✖ Sin Descuento</span>
+          </div>
+          <button class="btn-submit" style="margin-top: 1rem; width: 100%;" (click)="verDetalle(juego.id)">
+            Ver detalle →
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+    <hr class="divider-gold" aria-hidden="true" />
+
+    <nav aria-label="Navegar entre categorías" style="text-align:center; padding: 1rem 0;">
+      <div class="ornament" aria-hidden="true">✦ ✦ ✦</div>
+      <p style="font-family: var(--font-heading); font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--clr-text-muted); margin-bottom: 0.75rem;">
+        Seguir explorando
+      </p>
+      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+        <a routerLink="/tienda/estrategia" class="category-card-arrow" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">⚔ Estrategia</a>
+        <a routerLink="/tienda/familiares" class="category-card-arrow" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">🏠 Familiares</a>
+        <a routerLink="/tienda/fiestas" class="category-card-arrow" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">🎉 Fiestas</a>
+        <a routerLink="/tienda/cartas" class="category-card-arrow" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">🃏 Cartas</a>
+        <a routerLink="/" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">← Volver al Inicio</a>
+      </div>
+    </nav>
+
+  </main>
+
+</ng-container>

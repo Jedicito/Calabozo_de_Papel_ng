@@ -1,0 +1,119 @@
+<header class="form-hero" role="banner">
+  <span class="form-hero-icon" aria-hidden="true">📜</span>
+  <h1 class="category-title">Crear Cuenta</h1>
+  <p class="category-subtitle">Únete al gremio y acumula recompensas en cada compra</p>
+</header>
+
+<main class="form-wrapper" id="main">
+
+  <div *ngIf="registroExitoso" class="success-banner" role="alert" aria-live="polite">
+    <span class="banner-icon" aria-hidden="true">🎉</span>
+    <h3>¡Bienvenido al Calabozo, aventurero!</h3>
+    <p>Tu cuenta <strong>{{ usuarioCreado }}</strong> ha sido creada con éxito.<br>
+      Pronto podrás canjear tus recompensas.</p>
+  </div>
+
+  <div class="form-card">
+
+    <!-- Sección 1: Datos personales -->
+    <p class="section-label" style="margin-bottom: var(--sp-md);">Datos personales</p>
+
+    <div class="row">
+      <div class="col-12 campo-grupo">
+        <label for="nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="nombre" class="campo-input"
+               placeholder="Ej: Arthas Menethil"
+               [(ngModel)]="nombre" name="nombre" autocomplete="name"/>
+      </div>
+
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="usuario">Nombre de usuario <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="usuario" class="campo-input"
+               placeholder="Ej: arthas99"
+               [(ngModel)]="usuario" name="usuario" autocomplete="username"/>
+        <span class="campo-hint">Sin espacios, mínimo 4 caracteres.</span>
+      </div>
+
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+        <input type="email" id="email" class="campo-input"
+               placeholder="tu@correo.cl"
+               [(ngModel)]="email" name="email" autocomplete="email"/>
+      </div>
+    </div>
+
+    <hr class="form-divider" aria-hidden="true"/>
+
+    <!-- Sección 2: Contraseña -->
+    <p class="section-label" style="margin-bottom: var(--sp-md);">Contraseña de acceso</p>
+
+    <div class="row">
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="clave">Contraseña <span class="req" aria-hidden="true">*</span></label>
+        <div class="input-pass-wrap">
+          <input [type]="mostrarContrasena ? 'text' : 'password'"
+                 id="clave" class="campo-input"
+                 placeholder="••••••••" maxlength="18"
+                 [(ngModel)]="contrasena" name="contrasena" autocomplete="new-password"/>
+          <button type="button" class="btn-toggle-pass" (click)="toggleContrasena()" aria-label="Mostrar contraseña">
+            <span class="icono-ojo" aria-hidden="true">{{ mostrarContrasena ? '👁' : '🙈' }}</span>
+          </button>
+        </div>
+        <span class="campo-hint">6–18 caracteres, 1 mayúscula y 1 número.</span>
+      </div>
+
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="repetir-clave">Repetir contraseña <span class="req" aria-hidden="true">*</span></label>
+        <div class="input-pass-wrap">
+          <input [type]="mostrarRepetir ? 'text' : 'password'"
+                 id="repetir-clave" class="campo-input"
+                 placeholder="••••••••" maxlength="18"
+                 [(ngModel)]="repetirContrasena" name="repetirContrasena" autocomplete="new-password"/>
+          <button type="button" class="btn-toggle-pass" (click)="toggleRepetir()" aria-label="Mostrar contraseña">
+            <span class="icono-ojo" aria-hidden="true">{{ mostrarRepetir ? '👁' : '🙈' }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <hr class="form-divider" aria-hidden="true"/>
+
+    <!-- Sección 3: Datos adicionales -->
+    <p class="section-label" style="margin-bottom: var(--sp-md);">Datos adicionales</p>
+
+    <div class="row">
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="nacimiento">Fecha de nacimiento <span class="req" aria-hidden="true">*</span></label>
+        <input type="date" id="nacimiento" class="campo-input"
+               [(ngModel)]="fechaNacimiento" name="fechaNacimiento" autocomplete="bday"/>
+        <span class="campo-hint">Debes tener al menos 13 años.</span>
+      </div>
+
+      <div class="col-12 col-md-6 campo-grupo">
+        <label for="direccion">
+          Dirección de despacho
+          <span class="campo-opcional-tag" aria-label="campo opcional">Opcional</span>
+        </label>
+        <input type="text" id="direccion" class="campo-input"
+               placeholder="Calle, número, ciudad…"
+               [(ngModel)]="direccion" name="direccion" autocomplete="street-address"/>
+        <span class="campo-hint">Puedes completarla luego desde tu perfil.</span>
+      </div>
+    </div>
+
+    <p style="font-size:0.78rem; color:var(--clr-text-muted); margin-top:var(--sp-sm);">
+      <span style="color:var(--clr-amber);">*</span> Campos obligatorios
+    </p>
+
+    <div class="form-actions">
+      <button class="btn-submit" (click)="onSubmit()">⚔ Crear mi cuenta</button>
+      <button type="button" class="btn-clear" (click)="limpiar()">↺ Limpiar</button>
+    </div>
+
+    <p class="form-footer-link">
+      ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
+    </p>
+
+  </div>
+
+</main>

@@ -1,0 +1,37 @@
+<header class="site-header" role="banner">
+  <span class="header-flame" aria-hidden="true">🕯️</span>
+  <h1 class="site-title">El Calabozo de Papel</h1>
+  <p class="site-tagline">Tu aventura comienza en el tablero</p>
+  <div class="header-divider" aria-hidden="true"></div>
+</header>
+
+<main class="main-content" id="main">
+
+  <p class="section-label">Explorar</p>
+  <h2 class="section-title">Nuestras Categorías</h2>
+
+  <div class="categories-grid" role="list">
+
+    <a *ngFor="let cat of categorias"
+       [routerLink]="['/categoria', cat.slug]"
+       class="category-card"
+       role="listitem"
+       [attr.aria-label]="'Ver categoría ' + cat.nombre">
+      <img class="category-card-img"
+           [src]="cat.fotoPortada"
+           [alt]="'Juegos ' + cat.nombre"
+           loading="lazy"/>
+      <div class="category-card-overlay" aria-hidden="true"></div>
+      <div class="category-card-body">
+        <p class="category-card-name">{{ cat.icono }} {{ cat.nombre }}</p>
+        <p class="category-card-desc">{{ cat.descripcionCorta }}</p>
+        <span class="category-card-arrow">Explorar categoría →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <hr class="divider-gold" aria-hidden="true" />
+  <div class="ornament" aria-hidden="true">✦ ✦ ✦</div>
+
+</main>

@@ -1,0 +1,86 @@
+<header class="form-hero">
+  <span class="form-hero-icon" aria-hidden="true">🔓</span>
+  <h1 class="category-title">Recuperar Contraseña</h1>
+  <p class="category-subtitle">Ingresa tu correo para restablecer tu acceso</p>
+</header>
+
+<main class="form-wrapper" id="main">
+  <div class="form-card">
+
+    <!-- Paso 1: Verificar correo -->
+    <div *ngIf="paso === 1">
+      <p class="section-label" style="margin-bottom:var(--sp-md);">Paso 1 — Verificar correo</p>
+
+      <div class="campo-grupo">
+        <label for="rec-email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+        <input type="email" id="rec-email" class="campo-input"
+               placeholder="tu@correo.cl"
+               [(ngModel)]="email" name="email" autocomplete="email"/>
+      </div>
+
+      <div *ngIf="errorEmail" class="alert-error-box" role="alert">
+        {{ errorEmail }}
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-submit" (click)="verificarEmail()">Verificar correo →</button>
+      </div>
+    </div>
+
+    <!-- Paso 2: Nueva contraseña -->
+    <div *ngIf="paso === 2">
+      <p class="section-label" style="margin-bottom:var(--sp-md);">Paso 2 — Nueva contraseña</p>
+      <p style="font-style:italic; color:var(--clr-text-muted); font-size:0.9rem; margin-bottom:var(--sp-lg);">
+        Restableciendo contraseña para: {{ emailVerificado }}
+      </p>
+
+      <div class="row">
+        <div class="col-12 col-md-6 campo-grupo">
+          <label for="nueva-clave">Nueva contraseña <span class="req" aria-hidden="true">*</span></label>
+          <div class="input-pass-wrap">
+            <input [type]="mostrarNueva ? 'text' : 'password'"
+                   id="nueva-clave" class="campo-input"
+                   placeholder="••••••••" maxlength="18"
+                   [(ngModel)]="nuevaClave" name="nuevaClave"/>
+            <button type="button" class="btn-toggle-pass" (click)="mostrarNueva = !mostrarNueva" aria-label="Mostrar contraseña">
+              <span class="icono-ojo" aria-hidden="true">{{ mostrarNueva ? '👁' : '🙈' }}</span>
+            </button>
+          </div>
+          <span class="campo-hint">6–18 car., mayúscula, número y carácter especial.</span>
+        </div>
+
+        <div class="col-12 col-md-6 campo-grupo">
+          <label for="repetir-nueva-clave">Repetir contraseña <span class="req" aria-hidden="true">*</span></label>
+          <div class="input-pass-wrap">
+            <input [type]="mostrarRepetir ? 'text' : 'password'"
+                   id="repetir-nueva-clave" class="campo-input"
+                   placeholder="••••••••" maxlength="18"
+                   [(ngModel)]="repetirClave" name="repetirClave"/>
+            <button type="button" class="btn-toggle-pass" (click)="mostrarRepetir = !mostrarRepetir" aria-label="Mostrar contraseña">
+              <span class="icono-ojo" aria-hidden="true">{{ mostrarRepetir ? '👁' : '🙈' }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-submit" (click)="guardarNuevaClave()">✔ Guardar nueva contraseña</button>
+        <button type="button" class="btn-clear" (click)="volverAlPaso1()">← Volver</button>
+      </div>
+    </div>
+
+    <!-- Paso 3: Éxito -->
+    <div *ngIf="paso === 3" style="text-align: center; padding: 2rem 0;">
+      <p style="font-size: 3rem;">🎉</p>
+      <h3 style="font-family: var(--font-heading); color: var(--clr-gold-light); margin-bottom: 1rem;">¡Contraseña actualizada!</h3>
+      <p>Tu contraseña ha sido restablecida con éxito.</p>
+      <a routerLink="/login" class="btn-submit" style="display: inline-block; margin-top: 1.5rem;">
+        ⚔ Iniciar Sesión
+      </a>
+    </div>
+
+    <hr class="form-divider" aria-hidden="true"/>
+    <p class="form-footer-link"><a routerLink="/login">← Volver al inicio de sesión</a></p>
+
+  </div>
+</main>
