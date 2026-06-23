@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { DataService } from '../../../services/data.service';
 import { CommonModule } from '@angular/common'; // Obligatorio para *ngIf y *ngFor
 import { FormsModule } from '@angular/forms';   // Obligatorio para [(ngModel)]
@@ -7,7 +8,7 @@ import { FormsModule } from '@angular/forms';   // Obligatorio para [(ngModel)]
   selector: 'app-recuperar',
   templateUrl: './recuperar.component.html',
   standalone: true, // Faltaba esto
-  imports: [CommonModule, FormsModule], // Faltaba esto
+  imports: [CommonModule, FormsModule, RouterLink], // Faltaba esto
 })
 export class RecuperarComponent {
 

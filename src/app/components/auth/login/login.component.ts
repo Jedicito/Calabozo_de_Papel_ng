@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common'; // Obligatorio para *ngIf y *ngFor
 import { FormsModule } from '@angular/forms';   // Obligatorio para [(ngModel)]
@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';   // Obligatorio para [(ngModel)]
   selector: 'app-login',
   templateUrl: './login.component.html',
   standalone: true, // Faltaba esto
-  imports: [CommonModule, FormsModule], // Faltaba esto
+  imports: [CommonModule, FormsModule, RouterLink], // Faltaba esto
 })
 export class LoginComponent {
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { DataService } from '../../../services/data.service';
 import { Juego } from '../../../models/juego.model';
 import { CommonModule } from '@angular/common'; // Obligatorio para *ngIf y *ngFor
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';   // Obligatorio para [(ngModel)]
   selector: 'app-detalle-juego',
   templateUrl: './detalle-juego.component.html',
   standalone: true, // Faltaba esto
-  imports: [CommonModule, FormsModule], // Faltaba esto
+  imports: [CommonModule, FormsModule, RouterLink], // Faltaba esto
 })
 export class DetalleJuegoComponent implements OnInit {
 

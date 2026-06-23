@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DataService } from '../../../services/data.service';
 import { Usuario } from '../../../models/usuario.model';
 import { CommonModule } from '@angular/common'; // Obligatorio para *ngIf y *ngFor
@@ -17,7 +17,7 @@ import {
   selector: 'app-registro',
   templateUrl: './registro.component.html',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // Se reemplaza FormsModule por ReactiveFormsModule
+  imports: [CommonModule, ReactiveFormsModule, RouterLink], // Se reemplaza FormsModule por ReactiveFormsModule
 })
 export class RegistroComponent {
 
