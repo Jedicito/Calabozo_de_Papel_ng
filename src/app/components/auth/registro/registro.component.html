@@ -15,100 +15,144 @@
 
   <div class="form-card">
 
-    <!-- Sección 1: Datos personales -->
-    <p class="section-label" style="margin-bottom: var(--sp-md);">Datos personales</p>
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" novalidate>
 
-    <div class="row">
-      <div class="col-12 campo-grupo">
-        <label for="nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
-        <input type="text" id="nombre" class="campo-input"
-               placeholder="Ej: Arthas Menethil"
-               [(ngModel)]="nombre" name="nombre" autocomplete="name"/>
-      </div>
+      <!-- Sección 1: Datos personales -->
+      <p class="section-label" style="margin-bottom: var(--sp-md);">Datos personales</p>
 
-      <div class="col-12 col-md-6 campo-grupo">
-        <label for="usuario">Nombre de usuario <span class="req" aria-hidden="true">*</span></label>
-        <input type="text" id="usuario" class="campo-input"
-               placeholder="Ej: arthas99"
-               [(ngModel)]="usuario" name="usuario" autocomplete="username"/>
-        <span class="campo-hint">Sin espacios, mínimo 4 caracteres.</span>
-      </div>
-
-      <div class="col-12 col-md-6 campo-grupo">
-        <label for="email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
-        <input type="email" id="email" class="campo-input"
-               placeholder="tu@correo.cl"
-               [(ngModel)]="email" name="email" autocomplete="email"/>
-      </div>
-    </div>
-
-    <hr class="form-divider" aria-hidden="true"/>
-
-    <!-- Sección 2: Contraseña -->
-    <p class="section-label" style="margin-bottom: var(--sp-md);">Contraseña de acceso</p>
-
-    <div class="row">
-      <div class="col-12 col-md-6 campo-grupo">
-        <label for="clave">Contraseña <span class="req" aria-hidden="true">*</span></label>
-        <div class="input-pass-wrap">
-          <input [type]="mostrarContrasena ? 'text' : 'password'"
-                 id="clave" class="campo-input"
-                 placeholder="••••••••" maxlength="18"
-                 [(ngModel)]="contrasena" name="contrasena" autocomplete="new-password"/>
-          <button type="button" class="btn-toggle-pass" (click)="toggleContrasena()" aria-label="Mostrar contraseña">
-            <span class="icono-ojo" aria-hidden="true">{{ mostrarContrasena ? '👁' : '🙈' }}</span>
-          </button>
+      <div class="row">
+        <div class="col-12 campo-grupo">
+          <label for="nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="nombre" class="campo-input"
+                 placeholder="Ej: Arthas Menethil"
+                 formControlName="nombre" autocomplete="name"/>
+          <small class="text-danger" *ngIf="f['nombre'].touched && f['nombre'].errors?.['required']">
+            El nombre es obligatorio.
+          </small>
         </div>
-        <span class="campo-hint">6–18 caracteres, 1 mayúscula y 1 número.</span>
-      </div>
 
-      <div class="col-12 col-md-6 campo-grupo">
-        <label for="repetir-clave">Repetir contraseña <span class="req" aria-hidden="true">*</span></label>
-        <div class="input-pass-wrap">
-          <input [type]="mostrarRepetir ? 'text' : 'password'"
-                 id="repetir-clave" class="campo-input"
-                 placeholder="••••••••" maxlength="18"
-                 [(ngModel)]="repetirContrasena" name="repetirContrasena" autocomplete="new-password"/>
-          <button type="button" class="btn-toggle-pass" (click)="toggleRepetir()" aria-label="Mostrar contraseña">
-            <span class="icono-ojo" aria-hidden="true">{{ mostrarRepetir ? '👁' : '🙈' }}</span>
-          </button>
+        <div class="col-12 col-md-6 campo-grupo">
+          <label for="usuario">Nombre de usuario <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="usuario" class="campo-input"
+                 placeholder="Ej: arthas99"
+                 formControlName="usuario" autocomplete="username"/>
+          <span class="campo-hint">Sin espacios, mínimo 4 caracteres.</span>
+          <small class="text-danger" *ngIf="f['usuario'].touched && f['usuario'].errors?.['required']">
+            El nombre de usuario es obligatorio.
+          </small>
+          <small class="text-danger" *ngIf="f['usuario'].touched && f['usuario'].errors?.['minlength']">
+            Debe tener al menos 4 caracteres.
+          </small>
+        </div>
+
+        <div class="col-12 col-md-6 campo-grupo">
+          <label for="email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="email" class="campo-input"
+                 placeholder="tu@correo.cl"
+                 formControlName="email" autocomplete="email"/>
+          <small class="text-danger" *ngIf="f['email'].touched && f['email'].errors?.['required']">
+            El correo es obligatorio.
+          </small>
+          <small class="text-danger" *ngIf="f['email'].touched && f['email'].errors?.['email']">
+            Ingresa un correo electrónico válido.
+          </small>
         </div>
       </div>
-    </div>
 
-    <hr class="form-divider" aria-hidden="true"/>
+      <hr class="form-divider" aria-hidden="true"/>
 
-    <!-- Sección 3: Datos adicionales -->
-    <p class="section-label" style="margin-bottom: var(--sp-md);">Datos adicionales</p>
+      <!-- Sección 2: Contraseña -->
+      <p class="section-label" style="margin-bottom: var(--sp-md);">Contraseña de acceso</p>
 
-    <div class="row">
-      <div class="col-12 col-md-6 campo-grupo">
-        <label for="nacimiento">Fecha de nacimiento <span class="req" aria-hidden="true">*</span></label>
-        <input type="date" id="nacimiento" class="campo-input"
-               [(ngModel)]="fechaNacimiento" name="fechaNacimiento" autocomplete="bday"/>
-        <span class="campo-hint">Debes tener al menos 13 años.</span>
+      <div class="row">
+        <div class="col-12 col-md-6 campo-grupo">
+          <label for="clave">Contraseña <span class="req" aria-hidden="true">*</span></label>
+          <div class="input-pass-wrap">
+            <input [type]="mostrarContrasena ? 'text' : 'password'"
+                   id="clave" class="campo-input"
+                   placeholder="••••••••" maxlength="18"
+                   formControlName="contrasena" autocomplete="new-password"/>
+            <button type="button" class="btn-toggle-pass" (click)="toggleContrasena()" aria-label="Mostrar contraseña">
+              <span class="icono-ojo" aria-hidden="true">{{ mostrarContrasena ? '👁' : '🙈' }}</span>
+            </button>
+          </div>
+          <span class="campo-hint">6–18 caracteres, 1 mayúscula y 1 número.</span>
+          <small class="text-danger" *ngIf="f['contrasena'].touched && f['contrasena'].errors?.['required']">
+            La contraseña es obligatoria.
+          </small>
+          <small class="text-danger" *ngIf="f['contrasena'].touched && f['contrasena'].errors?.['minlength']">
+            Debe tener al menos 6 caracteres.
+          </small>
+          <small class="text-danger" *ngIf="f['contrasena'].touched && f['contrasena'].errors?.['maxlength']">
+            No puede superar los 18 caracteres.
+          </small>
+          <small class="text-danger" *ngIf="f['contrasena'].touched && f['contrasena'].errors?.['contrasenaInsegura']">
+            Debe incluir al menos una mayúscula y un número.
+          </small>
+        </div>
+
+        <div class="col-12 col-md-6 campo-grupo">
+          <label for="repetir-clave">Repetir contraseña <span class="req" aria-hidden="true">*</span></label>
+          <div class="input-pass-wrap">
+            <input [type]="mostrarRepetir ? 'text' : 'password'"
+                   id="repetir-clave" class="campo-input"
+                   placeholder="••••••••" maxlength="18"
+                   formControlName="repetirContrasena" autocomplete="new-password"/>
+            <button type="button" class="btn-toggle-pass" (click)="toggleRepetir()" aria-label="Mostrar contraseña">
+              <span class="icono-ojo" aria-hidden="true">{{ mostrarRepetir ? '👁' : '🙈' }}</span>
+            </button>
+          </div>
+          <small class="text-danger" *ngIf="f['repetirContrasena'].touched && f['repetirContrasena'].errors?.['required']">
+            Debes repetir la contraseña.
+          </small>
+          <small class="text-danger"
+                 *ngIf="f['repetirContrasena'].touched && registroForm.errors?.['contrasenasNoCoinciden']">
+            Las contraseñas no coinciden.
+          </small>
+        </div>
       </div>
 
-      <div class="col-12 col-md-6 campo-grupo">
-        <label for="direccion">
-          Dirección de despacho
-          <span class="campo-opcional-tag" aria-label="campo opcional">Opcional</span>
-        </label>
-        <input type="text" id="direccion" class="campo-input"
-               placeholder="Calle, número, ciudad…"
-               [(ngModel)]="direccion" name="direccion" autocomplete="street-address"/>
-        <span class="campo-hint">Puedes completarla luego desde tu perfil.</span>
+      <hr class="form-divider" aria-hidden="true"/>
+
+      <!-- Sección 3: Datos adicionales -->
+      <p class="section-label" style="margin-bottom: var(--sp-md);">Datos adicionales</p>
+
+      <div class="row">
+        <div class="col-12 col-md-6 campo-grupo">
+          <label for="nacimiento">Fecha de nacimiento <span class="req" aria-hidden="true">*</span></label>
+          <input type="date" id="nacimiento" class="campo-input"
+                 formControlName="fechaNacimiento" autocomplete="bday"/>
+          <span class="campo-hint">Debes tener al menos 13 años.</span>
+          <small class="text-danger" *ngIf="f['fechaNacimiento'].touched && f['fechaNacimiento'].errors?.['required']">
+            La fecha de nacimiento es obligatoria.
+          </small>
+          <small class="text-danger" *ngIf="f['fechaNacimiento'].touched && f['fechaNacimiento'].errors?.['edadMinima']">
+            Debes tener al menos 13 años para registrarte.
+          </small>
+        </div>
+
+        <div class="col-12 col-md-6 campo-grupo">
+          <label for="direccion">
+            Dirección de despacho
+            <span class="campo-opcional-tag" aria-label="campo opcional">Opcional</span>
+          </label>
+          <input type="text" id="direccion" class="campo-input"
+                 placeholder="Calle, número, ciudad…"
+                 formControlName="direccion" autocomplete="street-address"/>
+          <span class="campo-hint">Puedes completarla luego desde tu perfil.</span>
+        </div>
       </div>
-    </div>
 
-    <p style="font-size:0.78rem; color:var(--clr-text-muted); margin-top:var(--sp-sm);">
-      <span style="color:var(--clr-amber);">*</span> Campos obligatorios
-    </p>
+      <p style="font-size:0.78rem; color:var(--clr-text-muted); margin-top:var(--sp-sm);">
+        <span style="color:var(--clr-amber);">*</span> Campos obligatorios
+      </p>
 
-    <div class="form-actions">
-      <button class="btn-submit" (click)="onSubmit()">⚔ Crear mi cuenta</button>
-      <button type="button" class="btn-clear" (click)="limpiar()">↺ Limpiar</button>
-    </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-submit">⚔ Crear mi cuenta</button>
+        <button type="button" class="btn-clear" (click)="limpiar()">↺ Limpiar</button>
+      </div>
+
+    </form>
 
     <p class="form-footer-link">
       ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>
