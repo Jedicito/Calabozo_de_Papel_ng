@@ -1,0 +1,952 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>El Calabozo de Papel</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">El Calabozo de Papel</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ListaJuegosComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/tienda/lista-juegos/lista-juegos.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente que lista los juegos de una categoría.</p>
+<p>Recibe el slug de la categoría como parámetro de ruta a través de un
+setter con <code>@Input</code> (binding de rutas de Angular) y carga la categoría y
+sus juegos desde <a href="../injectables/DataService.html">DataService</a>.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-lista-juegos</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterModule" target="_blank" >RouterModule</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./lista-juegos.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#categoria" >categoria</a>
+                            </li>
+                            <li>
+                                <a href="#juegos" >juegos</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#formatearPrecio" >formatearPrecio</a>
+                            </li>
+                            <li>
+                                <a href="#verDetalle" >verDetalle</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#nombre" >nombre</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#nombre" >nombre</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, dataService: <a href="../injectables/DataService.html" target="_self">DataService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/tienda/lista-juegos/lista-juegos.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Inyecta las dependencias del componente.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Router usado para navegar al detalle de un juego.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>dataService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DataService.html" target="_self" >DataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio de datos del catálogo.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nombre"></a>
+                        <b>nombre</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/tienda/lista-juegos/lista-juegos.component.ts:46</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Setter enlazado al parámetro de ruta <code>:nombre</code>. Angular lo invoca
+automáticamente cada vez que cambia la categoría seleccionada,
+sustituyendo la lógica que tradicionalmente iría en <code>ngOnInit</code>.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatearPrecio"></a>
+                    <span class="name">
+                        <span ><b>formatearPrecio</b></span>
+                        <a href="#formatearPrecio"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatearPrecio(precio: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/components/tienda/lista-juegos/lista-juegos.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Da formato de moneda a un precio, delegando en <a href="../injectables/DataService.html">DataService</a>.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>precio</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Precio sin formato.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Precio formateado como moneda chilena.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="verDetalle"></a>
+                    <span class="name">
+                        <span ><b>verDetalle</b></span>
+                        <a href="#verDetalle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>verDetalle(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/components/tienda/lista-juegos/lista-juegos.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Navega a la página de detalle del juego indicado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Identificador del juego a mostrar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categoria"></a>
+                    <span class="name">
+                        <span ><b>categoria</b></span>
+                        <a href="#categoria"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Categoria.html" target="_self" >Categoria | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/components/tienda/lista-juegos/lista-juegos.component.ts:24</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Categoría actualmente mostrada, o <code>undefined</code> si el slug no existe.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="juegos"></a>
+                    <span class="name">
+                        <span ><b>juegos</b></span>
+                        <a href="#juegos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Juego.html" target="_self" >Juego[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/components/tienda/lista-juegos/lista-juegos.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Juegos pertenecientes a la categoría actual.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="nombre"></a>
+                        <span class="name"><b>nombre</b><a href="#nombre"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>nombre(slug: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/tienda/lista-juegos/lista-juegos.component.ts:46</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Setter enlazado al parámetro de ruta <code>:nombre</code>. Angular lo invoca
+automáticamente cada vez que cambia la categoría seleccionada,
+sustituyendo la lógica que tradicionalmente iría en <code>ngOnInit</code>.</p>
+</div>
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                        <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>slug</td>
+                                                    
+                                                            <td>
+                                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                            <td>
+                                                                    <p>Slug de la categoría tomado de la URL.</p>
+
+                                                            </td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;; // &lt;- Cambiamos OnInit por Input
+import { Router, RouterModule } from &#x27;@angular/router&#x27;; // &lt;- Quitamos ActivatedRoute
+import { DataService } from &#x27;../../../services/data.service&#x27;;
+import { Juego, Categoria } from &#x27;../../../models/juego.model&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;; 
+import { FormsModule } from &#x27;@angular/forms&#x27;; 
+
+/**
+ * Componente que lista los juegos de una categoría.
+ *
+ * Recibe el slug de la categoría como parámetro de ruta a través de un
+ * setter con &#x60;@Input&#x60; (binding de rutas de Angular) y carga la categoría y
+ * sus juegos desde {@link DataService}.
+ */
+@Component({
+  selector: &#x27;app-lista-juegos&#x27;,
+  templateUrl: &#x27;./lista-juegos.component.html&#x27;,
+  standalone: true, 
+  imports: [CommonModule, FormsModule, RouterModule],
+})
+export class ListaJuegosComponent {
+
+  /** Categoría actualmente mostrada, o &#x60;undefined&#x60; si el slug no existe. */
+  categoria: Categoria | undefined;
+  /** Juegos pertenecientes a la categoría actual. */
+  juegos: Juego[] &#x3D; [];
+
+  /**
+   * Inyecta las dependencias del componente.
+   *
+   * @param router Router usado para navegar al detalle de un juego.
+   * @param dataService Servicio de datos del catálogo.
+   */
+  constructor(
+    private router: Router,
+    private dataService: DataService
+  ) {}
+
+  /**
+   * Setter enlazado al parámetro de ruta &#x60;:nombre&#x60;. Angular lo invoca
+   * automáticamente cada vez que cambia la categoría seleccionada,
+   * sustituyendo la lógica que tradicionalmente iría en &#x60;ngOnInit&#x60;.
+   *
+   * @param slug Slug de la categoría tomado de la URL.
+   */
+  @Input() set nombre(slug: string) {
+    if (slug) {
+      this.categoria &#x3D; this.dataService.getCategoriaBySlug(slug);
+      const juegosEncontrados &#x3D; this.dataService.getJuegosPorCategoria(slug);
+      
+      // Mantenemos la clonación para forzar al HTML a redibujar
+      this.juegos &#x3D; [...juegosEncontrados];
+    }
+  }
+
+  /**
+   * Navega a la página de detalle del juego indicado.
+   *
+   * @param id Identificador del juego a mostrar.
+   */
+  verDetalle(id: number): void {
+    this.router.navigate([&#x27;/juego&#x27;, id]);
+  }
+
+  /**
+   * Da formato de moneda a un precio, delegando en {@link DataService}.
+   *
+   * @param precio Precio sin formato.
+   * @returns Precio formateado como moneda chilena.
+   */
+  formatearPrecio(precio: number): string {
+    return this.dataService.formatearPrecio(precio);
+  }
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;ng-container *ngIf&#x3D;&quot;categoria&quot;&gt;
+
+  &lt;header class&#x3D;&quot;category-hero&quot; role&#x3D;&quot;banner&quot;&gt;
+    &lt;span class&#x3D;&quot;category-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;{{ categoria.icono }}&lt;/span&gt;
+    &lt;h1 class&#x3D;&quot;category-title&quot;&gt;{{ categoria.nombre }}&lt;/h1&gt;
+    &lt;p class&#x3D;&quot;category-subtitle&quot;&gt;{{ categoria.subtitulo }}&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;main class&#x3D;&quot;main-content&quot; id&#x3D;&quot;main&quot;&gt;
+
+    &lt;p class&#x3D;&quot;section-label&quot;&gt;Catálogo&lt;/p&gt;
+    &lt;h2 class&#x3D;&quot;section-title&quot;&gt;Juegos Disponibles&lt;/h2&gt;
+
+    &lt;div class&#x3D;&quot;games-grid&quot; role&#x3D;&quot;list&quot;&gt;
+
+      &lt;article *ngFor&#x3D;&quot;let juego of juegos&quot; class&#x3D;&quot;game-card&quot; role&#x3D;&quot;listitem&quot;&gt;
+        &lt;div class&#x3D;&quot;game-card-img-wrap&quot;&gt;
+          &lt;img [src]&#x3D;&quot;juego.foto&quot; [alt]&#x3D;&quot;juego.nombre + &#x27; — juego de mesa&#x27;&quot; loading&#x3D;&quot;lazy&quot;/&gt;
+          &lt;span *ngIf&#x3D;&quot;juego.tieneDescuento&quot; class&#x3D;&quot;badge badge-discount badge-corner&quot; aria-label&#x3D;&quot;Con descuento&quot;&gt;🏷 Oferta&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;game-card-body&quot;&gt;
+          &lt;h3 class&#x3D;&quot;game-name&quot;&gt;{{ juego.nombre }}&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;game-desc&quot;&gt;{{ juego.descripcion }}&lt;/p&gt;
+          &lt;div class&#x3D;&quot;game-card-footer&quot;&gt;
+            &lt;span class&#x3D;&quot;game-price&quot;&gt;{{ formatearPrecio(juego.precio) }}&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;juego.tieneDescuento&quot; class&#x3D;&quot;badge badge-discount&quot; aria-label&#x3D;&quot;Con descuento&quot;&gt;✔ Con Descuento&lt;/span&gt;
+            &lt;span *ngIf&#x3D;&quot;!juego.tieneDescuento&quot; class&#x3D;&quot;badge badge-no-discount&quot; aria-label&#x3D;&quot;Sin descuento&quot;&gt;✖ Sin Descuento&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;button class&#x3D;&quot;btn-submit&quot; style&#x3D;&quot;margin-top: 1rem; width: 100%;&quot; (click)&#x3D;&quot;verDetalle(juego.id)&quot;&gt;
+            Ver detalle →
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/article&gt;
+
+    &lt;/div&gt;
+
+    &lt;hr class&#x3D;&quot;divider-gold&quot; aria-hidden&#x3D;&quot;true&quot; /&gt;
+
+    &lt;nav aria-label&#x3D;&quot;Navegar entre categorías&quot; style&#x3D;&quot;text-align:center; padding: 1rem 0;&quot;&gt;
+      &lt;div class&#x3D;&quot;ornament&quot; aria-hidden&#x3D;&quot;true&quot;&gt;✦ ✦ ✦&lt;/div&gt;
+      &lt;p style&#x3D;&quot;font-family: var(--font-heading); font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--clr-text-muted); margin-bottom: 0.75rem;&quot;&gt;
+        Seguir explorando
+      &lt;/p&gt;
+      &lt;div style&#x3D;&quot;display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;&quot;&gt;
+        &lt;a routerLink&#x3D;&quot;/tienda/estrategia&quot; class&#x3D;&quot;category-card-arrow&quot; style&#x3D;&quot;display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;&quot;&gt;⚔ Estrategia&lt;/a&gt;
+        &lt;a routerLink&#x3D;&quot;/tienda/familiares&quot; class&#x3D;&quot;category-card-arrow&quot; style&#x3D;&quot;display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;&quot;&gt;🏠 Familiares&lt;/a&gt;
+        &lt;a routerLink&#x3D;&quot;/tienda/fiestas&quot; class&#x3D;&quot;category-card-arrow&quot; style&#x3D;&quot;display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;&quot;&gt;🎉 Fiestas&lt;/a&gt;
+        &lt;a routerLink&#x3D;&quot;/tienda/cartas&quot; class&#x3D;&quot;category-card-arrow&quot; style&#x3D;&quot;display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;&quot;&gt;🃏 Cartas&lt;/a&gt;
+        &lt;a routerLink&#x3D;&quot;/&quot; style&#x3D;&quot;display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;&quot;&gt;← Volver al Inicio&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+
+  &lt;/main&gt;
+
+&lt;/ng-container&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><ng-container *ngIf="categoria">  <header class="category-hero" role="banner">    <span class="category-icon" aria-hidden="true">{{ categoria.icono }}</span>    <h1 class="category-title">{{ categoria.nombre }}</h1>    <p class="category-subtitle">{{ categoria.subtitulo }}</p>  </header>  <main class="main-content" id="main">    <p class="section-label">Catálogo</p>    <h2 class="section-title">Juegos Disponibles</h2>    <div class="games-grid" role="list">      <article *ngFor="let juego of juegos" class="game-card" role="listitem">        <div class="game-card-img-wrap">          <img [src]="juego.foto" [alt]="juego.nombre + \' — juego de mesa\'" loading="lazy"/>          <span *ngIf="juego.tieneDescuento" class="badge badge-discount badge-corner" aria-label="Con descuento">🏷 Oferta</span>        </div>        <div class="game-card-body">          <h3 class="game-name">{{ juego.nombre }}</h3>          <p class="game-desc">{{ juego.descripcion }}</p>          <div class="game-card-footer">            <span class="game-price">{{ formatearPrecio(juego.precio) }}</span>            <span *ngIf="juego.tieneDescuento" class="badge badge-discount" aria-label="Con descuento">✔ Con Descuento</span>            <span *ngIf="!juego.tieneDescuento" class="badge badge-no-discount" aria-label="Sin descuento">✖ Sin Descuento</span>          </div>          <button class="btn-submit" style="margin-top: 1rem; width: 100%;" (click)="verDetalle(juego.id)">            Ver detalle →          </button>        </div>      </article>    </div>    <hr class="divider-gold" aria-hidden="true" />    <nav aria-label="Navegar entre categorías" style="text-align:center; padding: 1rem 0;">      <div class="ornament" aria-hidden="true">✦ ✦ ✦</div>      <p style="font-family: var(--font-heading); font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase; color: var(--clr-text-muted); margin-bottom: 0.75rem;">        Seguir explorando      </p>      <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">        <a routerLink="/tienda/estrategia" class="category-card-arrow" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">⚔ Estrategia</a>        <a routerLink="/tienda/familiares" class="category-card-arrow" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">🏠 Familiares</a>        <a routerLink="/tienda/fiestas" class="category-card-arrow" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">🎉 Fiestas</a>        <a routerLink="/tienda/cartas" class="category-card-arrow" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">🃏 Cartas</a>        <a routerLink="/" style="display:inline-flex; gap:0.3em; font-family:var(--font-heading); font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--clr-gold); text-decoration:none; padding:0.5em 1em; border:1px solid var(--clr-border-gold); border-radius:4px;">← Volver al Inicio</a>      </div>    </nav>  </main></ng-container></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetalleJuegoComponent', 'selector': 'app-detalle-juego'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ListaJuegosComponent', 'selector': 'app-lista-juegos'},{'name': 'ListaUsuariosComponent', 'selector': 'app-lista-usuarios'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'RecuperarComponent', 'selector': 'app-recuperar'},{'name': 'RegistroComponent', 'selector': 'app-registro'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ListaJuegosComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ListaJuegosComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,24 +1,25 @@
 import { TestBed } from '@angular/core/testing';
-import { App } from './app';
+import { provideRouter } from '@angular/router';
+import { AppComponent } from './app.component';
 
-describe('App', () => {
+describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [App],
+      imports: [AppComponent],
+      providers: [provideRouter([])], // La navbar usa routerLink, por eso se provee el router
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
+  // Prueba 1: el componente raíz se crea correctamente (smoke test)
+  it('debe crear el componente raíz de la aplicación', () => {
+    const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
-/*
-  it('should render title', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, calabozo-de-papel-ng');
+
+  // Prueba 2: el título de la aplicación es el esperado
+  it("debe tener el título 'calabozo-de-papel-ng'", () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    expect(fixture.componentInstance.title).toBe('calabozo-de-papel-ng');
   });
-*/
 });

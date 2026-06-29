@@ -1,0 +1,1312 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>El Calabozo de Papel</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">El Calabozo de Papel</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PerfilComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/auth/perfil/perfil.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente de modificación de perfil del usuario autenticado.</p>
+<p>Al inicializarse carga los datos del usuario actual desde
+<a href="../injectables/AuthService.html">AuthService</a> en los campos del formulario y permite guardar los
+cambios o cancelarlos restaurando los valores originales.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-perfil</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./perfil.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <a href="#claveActual" >claveActual</a>
+                            </li>
+                            <li>
+                                <a href="#claveNueva" >claveNueva</a>
+                            </li>
+                            <li>
+                                <a href="#claveRepetir" >claveRepetir</a>
+                            </li>
+                            <li>
+                                <a href="#direccion" >direccion</a>
+                            </li>
+                            <li>
+                                <a href="#email" >email</a>
+                            </li>
+                            <li>
+                                <a href="#fechaNacimiento" >fechaNacimiento</a>
+                            </li>
+                            <li>
+                                <a href="#mensajeExito" >mensajeExito</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarActual" >mostrarActual</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarNueva" >mostrarNueva</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarRepetir" >mostrarRepetir</a>
+                            </li>
+                            <li>
+                                <a href="#nombre" >nombre</a>
+                            </li>
+                            <li>
+                                <a href="#usuario" >usuario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#cancelar" >cancelar</a>
+                            </li>
+                            <li>
+                                <a href="#guardarCambios" >guardarCambios</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>  datos. Es público para poder consultarse desde la plantilla.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio que provee el usuario autenticado y sus
+datos. Es público para poder consultarse desde la plantilla.</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancelar"></a>
+                    <span class="name">
+                        <span ><b>cancelar</b></span>
+                        <a href="#cancelar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancelar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Descarta los cambios recargando los datos originales del usuario.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardarCambios"></a>
+                    <span class="name">
+                        <span ><b>guardarCambios</b></span>
+                        <a href="#guardarCambios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>guardarCambios()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Guarda en el usuario autenticado los cambios realizados en el
+formulario y muestra un mensaje de confirmación.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Hook de inicialización: carga los datos del usuario actual en los
+campos del formulario.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description">Servicio que provee el usuario autenticado y sus
+datos. Es público para poder consultarse desde la plantilla.</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="claveActual"></a>
+                    <span class="name">
+                        <span ><b>claveActual</b></span>
+                        <a href="#claveActual"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Contraseña actual ingresada para validar el cambio de clave.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="claveNueva"></a>
+                    <span class="name">
+                        <span ><b>claveNueva</b></span>
+                        <a href="#claveNueva"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nueva contraseña ingresada por el usuario.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="claveRepetir"></a>
+                    <span class="name">
+                        <span ><b>claveRepetir</b></span>
+                        <a href="#claveRepetir"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Repetición de la nueva contraseña para confirmarla.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="direccion"></a>
+                    <span class="name">
+                        <span ><b>direccion</b></span>
+                        <a href="#direccion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:31</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dirección de despacho editable del usuario.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="email"></a>
+                    <span class="name">
+                        <span ><b>email</b></span>
+                        <a href="#email"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Correo electrónico editable del usuario.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fechaNacimiento"></a>
+                    <span class="name">
+                        <span ><b>fechaNacimiento</b></span>
+                        <a href="#fechaNacimiento"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Fecha de nacimiento editable, en formato <code>YYYY-MM-DD</code>.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mensajeExito"></a>
+                    <span class="name">
+                        <span ><b>mensajeExito</b></span>
+                        <a href="#mensajeExito"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mensaje de confirmación mostrado tras guardar los cambios.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarActual"></a>
+                    <span class="name">
+                        <span ><b>mostrarActual</b></span>
+                        <a href="#mostrarActual"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla la visibilidad del campo de contraseña actual.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarNueva"></a>
+                    <span class="name">
+                        <span ><b>mostrarNueva</b></span>
+                        <a href="#mostrarNueva"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla la visibilidad del campo de nueva contraseña.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarRepetir"></a>
+                    <span class="name">
+                        <span ><b>mostrarRepetir</b></span>
+                        <a href="#mostrarRepetir"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla la visibilidad del campo de repetir contraseña.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nombre"></a>
+                    <span class="name">
+                        <span ><b>nombre</b></span>
+                        <a href="#nombre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:23</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombre completo editable del usuario.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usuario"></a>
+                    <span class="name">
+                        <span ><b>usuario</b></span>
+                        <a href="#usuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/components/auth/perfil/perfil.component.ts:25</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombre de usuario (solo lectura en el formulario).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { AuthService } from &#x27;../../../services/auth.service&#x27;;
+import { Usuario } from &#x27;../../../models/usuario.model&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;; // Obligatorio para *ngIf y *ngFor
+import { FormsModule } from &#x27;@angular/forms&#x27;;   // Obligatorio para [(ngModel)]
+
+/**
+ * Componente de modificación de perfil del usuario autenticado.
+ *
+ * Al inicializarse carga los datos del usuario actual desde
+ * {@link AuthService} en los campos del formulario y permite guardar los
+ * cambios o cancelarlos restaurando los valores originales.
+ */
+@Component({
+  selector: &#x27;app-perfil&#x27;,
+  templateUrl: &#x27;./perfil.component.html&#x27;,
+  standalone: true, // Faltaba esto
+  imports: [CommonModule, FormsModule], // Faltaba esto
+})
+export class PerfilComponent implements OnInit {
+
+  /** Nombre completo editable del usuario. */
+  nombre: string &#x3D; &#x27;&#x27;;
+  /** Nombre de usuario (solo lectura en el formulario). */
+  usuario: string &#x3D; &#x27;&#x27;;
+  /** Correo electrónico editable del usuario. */
+  email: string &#x3D; &#x27;&#x27;;
+  /** Fecha de nacimiento editable, en formato &#x60;YYYY-MM-DD&#x60;. */
+  fechaNacimiento: string &#x3D; &#x27;&#x27;;
+  /** Dirección de despacho editable del usuario. */
+  direccion: string &#x3D; &#x27;&#x27;;
+
+  /** Contraseña actual ingresada para validar el cambio de clave. */
+  claveActual: string &#x3D; &#x27;&#x27;;
+  /** Nueva contraseña ingresada por el usuario. */
+  claveNueva: string &#x3D; &#x27;&#x27;;
+  /** Repetición de la nueva contraseña para confirmarla. */
+  claveRepetir: string &#x3D; &#x27;&#x27;;
+
+  /** Controla la visibilidad del campo de contraseña actual. */
+  mostrarActual: boolean &#x3D; false;
+  /** Controla la visibilidad del campo de nueva contraseña. */
+  mostrarNueva: boolean &#x3D; false;
+  /** Controla la visibilidad del campo de repetir contraseña. */
+  mostrarRepetir: boolean &#x3D; false;
+
+  /** Mensaje de confirmación mostrado tras guardar los cambios. */
+  mensajeExito: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * @param authService Servicio que provee el usuario autenticado y sus
+   *   datos. Es público para poder consultarse desde la plantilla.
+   */
+  constructor(public authService: AuthService) {}
+
+  /**
+   * Hook de inicialización: carga los datos del usuario actual en los
+   * campos del formulario.
+   */
+  ngOnInit(): void {
+    const u &#x3D; this.authService.getUsuarioActual();
+    if (u) {
+      this.nombre &#x3D; u.nombre;
+      this.usuario &#x3D; u.usuario;
+      this.email &#x3D; u.email;
+      this.fechaNacimiento &#x3D; u.fechaNacimiento || &#x27;&#x27;;
+      this.direccion &#x3D; u.direccion || &#x27;&#x27;;
+    }
+  }
+
+  /**
+   * Guarda en el usuario autenticado los cambios realizados en el
+   * formulario y muestra un mensaje de confirmación.
+   */
+  guardarCambios(): void {
+    const u &#x3D; this.authService.getUsuarioActual();
+    if (u) {
+      u.nombre &#x3D; this.nombre;
+      u.email &#x3D; this.email;
+      u.fechaNacimiento &#x3D; this.fechaNacimiento;
+      u.direccion &#x3D; this.direccion;
+      this.mensajeExito &#x3D; &#x27;✔ Cambios guardados exitosamente.&#x27;;
+    }
+  }
+
+  /**
+   * Descarta los cambios recargando los datos originales del usuario.
+   */
+  cancelar(): void {
+    this.ngOnInit();
+    this.mensajeExito &#x3D; &#x27;&#x27;;
+  }
+}
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;header class&#x3D;&quot;form-hero&quot;&gt;
+  &lt;span class&#x3D;&quot;form-hero-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;👤&lt;/span&gt;
+  &lt;h1 class&#x3D;&quot;category-title&quot;&gt;Mi Perfil&lt;/h1&gt;
+  &lt;p class&#x3D;&quot;category-subtitle&quot;&gt;Actualiza tus datos de aventurero&lt;/p&gt;
+&lt;/header&gt;
+
+&lt;main class&#x3D;&quot;form-wrapper&quot; id&#x3D;&quot;main&quot;&gt;
+  &lt;div class&#x3D;&quot;form-card&quot;&gt;
+
+    &lt;div *ngIf&#x3D;&quot;mensajeExito&quot; class&#x3D;&quot;success-banner&quot; role&#x3D;&quot;alert&quot; style&#x3D;&quot;padding: 1rem; margin-bottom: 1rem; text-align: center;&quot;&gt;
+      {{ mensajeExito }}
+    &lt;/div&gt;
+
+    &lt;!-- Datos personales --&gt;
+    &lt;p class&#x3D;&quot;section-label&quot; style&#x3D;&quot;margin-bottom:var(--sp-md);&quot;&gt;Datos personales&lt;/p&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+
+      &lt;div class&#x3D;&quot;col-12 campo-grupo&quot;&gt;
+        &lt;label for&#x3D;&quot;p-nombre&quot;&gt;Nombre completo &lt;span class&#x3D;&quot;req&quot; aria-hidden&#x3D;&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;p-nombre&quot; class&#x3D;&quot;campo-input&quot;
+               placeholder&#x3D;&quot;Tu nombre completo&quot;
+               [(ngModel)]&#x3D;&quot;nombre&quot; name&#x3D;&quot;nombre&quot; autocomplete&#x3D;&quot;name&quot;/&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+        &lt;label for&#x3D;&quot;p-usuario&quot;&gt;Nombre de usuario&lt;/label&gt;
+        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;p-usuario&quot; class&#x3D;&quot;campo-input&quot;
+               [value]&#x3D;&quot;usuario&quot; disabled
+               style&#x3D;&quot;opacity: 0.6; cursor: not-allowed;&quot;/&gt;
+        &lt;span class&#x3D;&quot;campo-hint&quot;&gt;El nombre de usuario no se puede cambiar.&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+        &lt;label for&#x3D;&quot;p-email&quot;&gt;Correo electrónico &lt;span class&#x3D;&quot;req&quot; aria-hidden&#x3D;&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+        &lt;input type&#x3D;&quot;email&quot; id&#x3D;&quot;p-email&quot; class&#x3D;&quot;campo-input&quot;
+               placeholder&#x3D;&quot;tu@correo.cl&quot;
+               [(ngModel)]&#x3D;&quot;email&quot; name&#x3D;&quot;email&quot; autocomplete&#x3D;&quot;email&quot;/&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+        &lt;label for&#x3D;&quot;p-nacimiento&quot;&gt;Fecha de nacimiento&lt;/label&gt;
+        &lt;input type&#x3D;&quot;date&quot; id&#x3D;&quot;p-nacimiento&quot; class&#x3D;&quot;campo-input&quot;
+               [(ngModel)]&#x3D;&quot;fechaNacimiento&quot; name&#x3D;&quot;fechaNacimiento&quot; autocomplete&#x3D;&quot;bday&quot;/&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+        &lt;label for&#x3D;&quot;p-direccion&quot;&gt;
+          Dirección de despacho
+          &lt;span class&#x3D;&quot;campo-opcional-tag&quot; aria-label&#x3D;&quot;campo opcional&quot;&gt;Opcional&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;p-direccion&quot; class&#x3D;&quot;campo-input&quot;
+               placeholder&#x3D;&quot;Calle, número, ciudad…&quot;
+               [(ngModel)]&#x3D;&quot;direccion&quot; name&#x3D;&quot;direccion&quot; autocomplete&#x3D;&quot;street-address&quot;/&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+    &lt;hr class&#x3D;&quot;form-divider&quot; aria-hidden&#x3D;&quot;true&quot;/&gt;
+
+    &lt;!-- Cambiar contraseña --&gt;
+    &lt;p class&#x3D;&quot;section-label&quot; style&#x3D;&quot;margin-bottom:var(--sp-xs);&quot;&gt;Cambiar contraseña&lt;/p&gt;
+    &lt;p class&#x3D;&quot;campo-hint&quot; style&#x3D;&quot;margin-bottom:var(--sp-md);&quot;&gt;
+      Deja estos campos vacíos si no deseas cambiar tu contraseña.
+    &lt;/p&gt;
+    &lt;div class&#x3D;&quot;row&quot;&gt;
+
+      &lt;div class&#x3D;&quot;col-12 col-md-4 campo-grupo&quot;&gt;
+        &lt;label for&#x3D;&quot;p-clave-actual&quot;&gt;Contraseña actual&lt;/label&gt;
+        &lt;div class&#x3D;&quot;input-pass-wrap&quot;&gt;
+          &lt;input [type]&#x3D;&quot;mostrarActual ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+                 id&#x3D;&quot;p-clave-actual&quot; class&#x3D;&quot;campo-input&quot;
+                 placeholder&#x3D;&quot;••••••••&quot; maxlength&#x3D;&quot;18&quot;
+                 [(ngModel)]&#x3D;&quot;claveActual&quot; name&#x3D;&quot;claveActual&quot; autocomplete&#x3D;&quot;current-password&quot;/&gt;
+          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-toggle-pass&quot; (click)&#x3D;&quot;mostrarActual &#x3D; !mostrarActual&quot; aria-label&#x3D;&quot;Mostrar contraseña&quot;&gt;
+            &lt;span class&#x3D;&quot;icono-ojo&quot; aria-hidden&#x3D;&quot;true&quot;&gt;{{ mostrarActual ? &#x27;👁&#x27; : &#x27;🙈&#x27; }}&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-12 col-md-4 campo-grupo&quot;&gt;
+        &lt;label for&#x3D;&quot;p-clave-nueva&quot;&gt;Nueva contraseña&lt;/label&gt;
+        &lt;div class&#x3D;&quot;input-pass-wrap&quot;&gt;
+          &lt;input [type]&#x3D;&quot;mostrarNueva ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+                 id&#x3D;&quot;p-clave-nueva&quot; class&#x3D;&quot;campo-input&quot;
+                 placeholder&#x3D;&quot;••••••••&quot; maxlength&#x3D;&quot;18&quot;
+                 [(ngModel)]&#x3D;&quot;claveNueva&quot; name&#x3D;&quot;claveNueva&quot; autocomplete&#x3D;&quot;new-password&quot;/&gt;
+          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-toggle-pass&quot; (click)&#x3D;&quot;mostrarNueva &#x3D; !mostrarNueva&quot; aria-label&#x3D;&quot;Mostrar contraseña&quot;&gt;
+            &lt;span class&#x3D;&quot;icono-ojo&quot; aria-hidden&#x3D;&quot;true&quot;&gt;{{ mostrarNueva ? &#x27;👁&#x27; : &#x27;🙈&#x27; }}&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;span class&#x3D;&quot;campo-hint&quot;&gt;6–18 car., mayúscula, número y carácter especial.&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;col-12 col-md-4 campo-grupo&quot;&gt;
+        &lt;label for&#x3D;&quot;p-clave-repetir&quot;&gt;Repetir nueva contraseña&lt;/label&gt;
+        &lt;div class&#x3D;&quot;input-pass-wrap&quot;&gt;
+          &lt;input [type]&#x3D;&quot;mostrarRepetir ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+                 id&#x3D;&quot;p-clave-repetir&quot; class&#x3D;&quot;campo-input&quot;
+                 placeholder&#x3D;&quot;••••••••&quot; maxlength&#x3D;&quot;18&quot;
+                 [(ngModel)]&#x3D;&quot;claveRepetir&quot; name&#x3D;&quot;claveRepetir&quot; autocomplete&#x3D;&quot;new-password&quot;/&gt;
+          &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-toggle-pass&quot; (click)&#x3D;&quot;mostrarRepetir &#x3D; !mostrarRepetir&quot; aria-label&#x3D;&quot;Mostrar contraseña&quot;&gt;
+            &lt;span class&#x3D;&quot;icono-ojo&quot; aria-hidden&#x3D;&quot;true&quot;&gt;{{ mostrarRepetir ? &#x27;👁&#x27; : &#x27;🙈&#x27; }}&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+
+    &lt;p style&#x3D;&quot;font-size:0.78rem; color:var(--clr-text-muted); margin-top:var(--sp-sm);&quot;&gt;
+      &lt;span style&#x3D;&quot;color:var(--clr-amber);&quot;&gt;*&lt;/span&gt; Campos obligatorios
+    &lt;/p&gt;
+
+    &lt;div class&#x3D;&quot;form-actions&quot;&gt;
+      &lt;button class&#x3D;&quot;btn-submit&quot; (click)&#x3D;&quot;guardarCambios()&quot;&gt;✔ Guardar cambios&lt;/button&gt;
+      &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-clear&quot; (click)&#x3D;&quot;cancelar()&quot;&gt;✖ Cancelar&lt;/button&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/main&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><header class="form-hero">  <span class="form-hero-icon" aria-hidden="true">👤</span>  <h1 class="category-title">Mi Perfil</h1>  <p class="category-subtitle">Actualiza tus datos de aventurero</p></header><main class="form-wrapper" id="main">  <div class="form-card">    <div *ngIf="mensajeExito" class="success-banner" role="alert" style="padding: 1rem; margin-bottom: 1rem; text-align: center;">      {{ mensajeExito }}    </div>    <!-- Datos personales -->    <p class="section-label" style="margin-bottom:var(--sp-md);">Datos personales</p>    <div class="row">      <div class="col-12 campo-grupo">        <label for="p-nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>        <input type="text" id="p-nombre" class="campo-input"               placeholder="Tu nombre completo"               [(ngModel)]="nombre" name="nombre" autocomplete="name"/>      </div>      <div class="col-12 col-md-6 campo-grupo">        <label for="p-usuario">Nombre de usuario</label>        <input type="text" id="p-usuario" class="campo-input"               [value]="usuario" disabled               style="opacity: 0.6; cursor: not-allowed;"/>        <span class="campo-hint">El nombre de usuario no se puede cambiar.</span>      </div>      <div class="col-12 col-md-6 campo-grupo">        <label for="p-email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>        <input type="email" id="p-email" class="campo-input"               placeholder="tu@correo.cl"               [(ngModel)]="email" name="email" autocomplete="email"/>      </div>      <div class="col-12 col-md-6 campo-grupo">        <label for="p-nacimiento">Fecha de nacimiento</label>        <input type="date" id="p-nacimiento" class="campo-input"               [(ngModel)]="fechaNacimiento" name="fechaNacimiento" autocomplete="bday"/>      </div>      <div class="col-12 col-md-6 campo-grupo">        <label for="p-direccion">          Dirección de despacho          <span class="campo-opcional-tag" aria-label="campo opcional">Opcional</span>        </label>        <input type="text" id="p-direccion" class="campo-input"               placeholder="Calle, número, ciudad…"               [(ngModel)]="direccion" name="direccion" autocomplete="street-address"/>      </div>    </div>    <hr class="form-divider" aria-hidden="true"/>    <!-- Cambiar contraseña -->    <p class="section-label" style="margin-bottom:var(--sp-xs);">Cambiar contraseña</p>    <p class="campo-hint" style="margin-bottom:var(--sp-md);">      Deja estos campos vacíos si no deseas cambiar tu contraseña.    </p>    <div class="row">      <div class="col-12 col-md-4 campo-grupo">        <label for="p-clave-actual">Contraseña actual</label>        <div class="input-pass-wrap">          <input [type]="mostrarActual ? \'text\' : \'password\'"                 id="p-clave-actual" class="campo-input"                 placeholder="••••••••" maxlength="18"                 [(ngModel)]="claveActual" name="claveActual" autocomplete="current-password"/>          <button type="button" class="btn-toggle-pass" (click)="mostrarActual = !mostrarActual" aria-label="Mostrar contraseña">            <span class="icono-ojo" aria-hidden="true">{{ mostrarActual ? \'👁\' : \'🙈\' }}</span>          </button>        </div>      </div>      <div class="col-12 col-md-4 campo-grupo">        <label for="p-clave-nueva">Nueva contraseña</label>        <div class="input-pass-wrap">          <input [type]="mostrarNueva ? \'text\' : \'password\'"                 id="p-clave-nueva" class="campo-input"                 placeholder="••••••••" maxlength="18"                 [(ngModel)]="claveNueva" name="claveNueva" autocomplete="new-password"/>          <button type="button" class="btn-toggle-pass" (click)="mostrarNueva = !mostrarNueva" aria-label="Mostrar contraseña">            <span class="icono-ojo" aria-hidden="true">{{ mostrarNueva ? \'👁\' : \'🙈\' }}</span>          </button>        </div>        <span class="campo-hint">6–18 car., mayúscula, número y carácter especial.</span>      </div>      <div class="col-12 col-md-4 campo-grupo">        <label for="p-clave-repetir">Repetir nueva contraseña</label>        <div class="input-pass-wrap">          <input [type]="mostrarRepetir ? \'text\' : \'password\'"                 id="p-clave-repetir" class="campo-input"                 placeholder="••••••••" maxlength="18"                 [(ngModel)]="claveRepetir" name="claveRepetir" autocomplete="new-password"/>          <button type="button" class="btn-toggle-pass" (click)="mostrarRepetir = !mostrarRepetir" aria-label="Mostrar contraseña">            <span class="icono-ojo" aria-hidden="true">{{ mostrarRepetir ? \'👁\' : \'🙈\' }}</span>          </button>        </div>      </div>    </div>    <p style="font-size:0.78rem; color:var(--clr-text-muted); margin-top:var(--sp-sm);">      <span style="color:var(--clr-amber);">*</span> Campos obligatorios    </p>    <div class="form-actions">      <button class="btn-submit" (click)="guardarCambios()">✔ Guardar cambios</button>      <button type="button" class="btn-clear" (click)="cancelar()">✖ Cancelar</button>    </div>  </div></main></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetalleJuegoComponent', 'selector': 'app-detalle-juego'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ListaJuegosComponent', 'selector': 'app-lista-juegos'},{'name': 'ListaUsuariosComponent', 'selector': 'app-lista-usuarios'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'RecuperarComponent', 'selector': 'app-recuperar'},{'name': 'RegistroComponent', 'selector': 'app-registro'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PerfilComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PerfilComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

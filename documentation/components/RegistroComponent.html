@@ -1,0 +1,1514 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>El Calabozo de Papel</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">El Calabozo de Papel</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  RegistroComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/auth/registro/registro.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente de registro de nuevos usuarios.</p>
+<p>Usa formularios reactivos con validaciones a nivel de campo y de grupo:
+exige nombre, usuario, correo válido, contraseña segura (longitud,
+mayúscula y número), confirmación de contraseña coincidente y una edad
+mínima a partir de la fecha de nacimiento. Al validar correctamente,
+delega el alta en <a href="../injectables/DataService.html">DataService</a>.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-registro</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                <code><a href="https://angular.io/api/router/RouterLink" target="_blank" >RouterLink</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./registro.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#mostrarContrasena" >mostrarContrasena</a>
+                            </li>
+                            <li>
+                                <a href="#mostrarRepetir" >mostrarRepetir</a>
+                            </li>
+                            <li>
+                                <a href="#registroExitoso" >registroExitoso</a>
+                            </li>
+                            <li>
+                                <a href="#registroForm" >registroForm</a>
+                            </li>
+                            <li>
+                                <a href="#usuarioCreado" >usuarioCreado</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#contrasenaSeguraValidator" >contrasenaSeguraValidator</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#contrasenasIgualesValidator" >contrasenasIgualesValidator</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#edadMinimaValidator" >edadMinimaValidator</a>
+                            </li>
+                            <li>
+                                <a href="#limpiar" >limpiar</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#toggleContrasena" >toggleContrasena</a>
+                            </li>
+                            <li>
+                                <a href="#toggleRepetir" >toggleRepetir</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#f" >f</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(fb: <a href="https://angular.io/api/forms/FormBuilder" target="_blank">FormBuilder</a>, dataService: <a href="../injectables/DataService.html" target="_self">DataService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/auth/registro/registro.component.ts:43</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Construye el formulario reactivo y registra todos sus validadores.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/forms/FormBuilder" target="_blank" >FormBuilder</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Constructor de formularios reactivos.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>dataService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/DataService.html" target="_self" >DataService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Servicio donde se persiste el nuevo usuario.</p>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <p>Router de la aplicación (navegación posterior al alta).</p>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contrasenaSeguraValidator"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>contrasenaSeguraValidator</b></span>
+                        <a href="#contrasenaSeguraValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>contrasenaSeguraValidator(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/components/auth/registro/registro.component.ts:96</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Validador de contraseña segura: exige al menos una letra mayúscula y
+al menos un número. El requisito de longitud lo cubren otros
+validadores (<code>minLength</code>/<code>maxLength</code>).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>control</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Control de la contraseña a validar.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>ValidationErrors | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p><code>null</code> si es válida; <code>{ contrasenaInsegura: true }</code> si no.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="contrasenasIgualesValidator"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>contrasenasIgualesValidator</b></span>
+                        <a href="#contrasenasIgualesValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>contrasenasIgualesValidator(group: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/components/auth/registro/registro.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Validador a nivel de grupo: comprueba que la contraseña y su
+repetición coincidan.</p>
+<p>  <code>{ contrasenasNoCoinciden: true }</code>.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>group</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Grupo del formulario que contiene ambos controles.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>ValidationErrors | null</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p><code>null</code> si coinciden (o aún no se repite); en caso contrario
+<code>{ contrasenasNoCoinciden: true }</code>.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="edadMinimaValidator"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>edadMinimaValidator</b></span>
+                        <a href="#edadMinimaValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>edadMinimaValidator(min: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/app/components/auth/registro/registro.component.ts:115</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Crea un validador que exige una edad mínima a partir de la fecha de
+nacimiento indicada en el control.</p>
+<p>  <code>{ edadMinima: true }</code> si es menor, o <code>{ fechaInvalida: true }</code> si la
+  fecha no es válida.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>min</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Edad mínima requerida en años.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://angular.io/api/forms/ValidatorFn" target="_blank" >ValidatorFn</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Una {@link ValidatorFn} que devuelve <code>null</code> si cumple la edad,
+<code>{ edadMinima: true }</code> si es menor, o <code>{ fechaInvalida: true }</code> si la
+fecha no es válida.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="limpiar"></a>
+                    <span class="name">
+                        <span ><b>limpiar</b></span>
+                        <a href="#limpiar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>limpiar()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">src/app/components/auth/registro/registro.component.ts:183</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Restablece el formulario a su estado inicial vacío.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/components/auth/registro/registro.component.ts:158</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Procesa el envío del formulario de registro.</p>
+<p>Si el formulario es inválido marca los campos como tocados para mostrar
+los errores. Si es válido, arma el objeto <a href="../interfaces/Usuario.html">Usuario</a>, lo registra
+mediante <a href="DataService.registrarUsuario">DataService.registrarUsuario</a> y limpia el formulario.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleContrasena"></a>
+                    <span class="name">
+                        <span ><b>toggleContrasena</b></span>
+                        <a href="#toggleContrasena"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleContrasena()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">src/app/components/auth/registro/registro.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Alterna la visibilidad del campo de contraseña.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleRepetir"></a>
+                    <span class="name">
+                        <span ><b>toggleRepetir</b></span>
+                        <a href="#toggleRepetir"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleRepetir()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/components/auth/registro/registro.component.ts:197</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Alterna la visibilidad del campo de repetir contraseña.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarContrasena"></a>
+                    <span class="name">
+                        <span ><b>mostrarContrasena</b></span>
+                        <a href="#mostrarContrasena"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/components/auth/registro/registro.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla la visibilidad del campo de contraseña.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarRepetir"></a>
+                    <span class="name">
+                        <span ><b>mostrarRepetir</b></span>
+                        <a href="#mostrarRepetir"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/auth/registro/registro.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Controla la visibilidad del campo de repetir contraseña.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registroExitoso"></a>
+                    <span class="name">
+                        <span ><b>registroExitoso</b></span>
+                        <a href="#registroExitoso"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/auth/registro/registro.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Indica si el último registro se completó con éxito (muestra el aviso).</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registroForm"></a>
+                    <span class="name">
+                        <span ><b>registroForm</b></span>
+                        <a href="#registroForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/auth/registro/registro.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo con todos los campos y validadores del registro.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usuarioCreado"></a>
+                    <span class="name">
+                        <span ><b>usuarioCreado</b></span>
+                        <a href="#usuarioCreado"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/auth/registro/registro.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombre de usuario recién creado, usado en el mensaje de éxito.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="f"></a>
+                        <span class="name"><b>f</b><a href="#f"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>f()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/components/auth/registro/registro.component.ts:84</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Acceso rápido a los controles del formulario desde la plantilla HTML.</p>
+</div>
+
+                                <div>
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { Router, RouterLink } from &#x27;@angular/router&#x27;;
+import { DataService } from &#x27;../../../services/data.service&#x27;;
+import { Usuario } from &#x27;../../../models/usuario.model&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;; // Obligatorio para *ngIf y *ngFor
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+  ValidatorFn,
+} from &#x27;@angular/forms&#x27;; // Formularios reactivos
+
+/**
+ * Componente de registro de nuevos usuarios.
+ *
+ * Usa formularios reactivos con validaciones a nivel de campo y de grupo:
+ * exige nombre, usuario, correo válido, contraseña segura (longitud,
+ * mayúscula y número), confirmación de contraseña coincidente y una edad
+ * mínima a partir de la fecha de nacimiento. Al validar correctamente,
+ * delega el alta en {@link DataService}.
+ */
+@Component({
+  selector: &#x27;app-registro&#x27;,
+  templateUrl: &#x27;./registro.component.html&#x27;,
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink], // Se reemplaza FormsModule por ReactiveFormsModule
+})
+export class RegistroComponent {
+
+  /** Formulario reactivo con todos los campos y validadores del registro. */
+  registroForm: FormGroup;
+
+  /** Controla la visibilidad del campo de contraseña. */
+  mostrarContrasena: boolean &#x3D; false;
+  /** Controla la visibilidad del campo de repetir contraseña. */
+  mostrarRepetir: boolean &#x3D; false;
+  /** Indica si el último registro se completó con éxito (muestra el aviso). */
+  registroExitoso: boolean &#x3D; false;
+  /** Nombre de usuario recién creado, usado en el mensaje de éxito. */
+  usuarioCreado: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Construye el formulario reactivo y registra todos sus validadores.
+   *
+   * @param fb Constructor de formularios reactivos.
+   * @param dataService Servicio donde se persiste el nuevo usuario.
+   * @param router Router de la aplicación (navegación posterior al alta).
+   */
+  constructor(
+    private fb: FormBuilder,
+    private dataService: DataService,
+    private router: Router
+  ) {
+    this.registroForm &#x3D; this.fb.group(
+      {
+        nombre: [&#x27;&#x27;, Validators.required],
+        usuario: [&#x27;&#x27;, [Validators.required, Validators.minLength(4)]],
+        email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+        contrasena: [
+          &#x27;&#x27;,
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(18),
+            RegistroComponent.contrasenaSeguraValidator,
+          ],
+        ],
+        repetirContrasena: [&#x27;&#x27;, Validators.required],
+        fechaNacimiento: [&#x27;&#x27;, [Validators.required, RegistroComponent.edadMinimaValidator(13)]],
+        direccion: [&#x27;&#x27;], // Opcional: sin validadores
+      },
+      { validators: RegistroComponent.contrasenasIgualesValidator }
+    );
+  }
+
+  /**
+   * Acceso rápido a los controles del formulario desde la plantilla HTML.
+   *
+   * @returns El diccionario de controles de {@link registroForm}.
+   */
+  get f() {
+    return this.registroForm.controls;
+  }
+
+  /**
+   * Validador de contraseña segura: exige al menos una letra mayúscula y
+   * al menos un número. El requisito de longitud lo cubren otros
+   * validadores (&#x60;minLength&#x60;/&#x60;maxLength&#x60;).
+   *
+   * @param control Control de la contraseña a validar.
+   * @returns &#x60;null&#x60; si es válida; &#x60;{ contrasenaInsegura: true }&#x60; si no.
+   */
+  static contrasenaSeguraValidator(control: AbstractControl): ValidationErrors | null {
+    const valor: string &#x3D; control.value || &#x27;&#x27;;
+    if (!valor) {
+      return null; // &#x27;required&#x27; se encarga del campo vacío
+    }
+    const tieneMayuscula &#x3D; /[A-Z]/.test(valor);
+    const tieneNumero &#x3D; /[0-9]/.test(valor);
+    return tieneMayuscula &amp;&amp; tieneNumero ? null : { contrasenaInsegura: true };
+  }
+
+  /**
+   * Crea un validador que exige una edad mínima a partir de la fecha de
+   * nacimiento indicada en el control.
+   *
+   * @param min Edad mínima requerida en años.
+   * @returns Una {@link ValidatorFn} que devuelve &#x60;null&#x60; si cumple la edad,
+   *   &#x60;{ edadMinima: true }&#x60; si es menor, o &#x60;{ fechaInvalida: true }&#x60; si la
+   *   fecha no es válida.
+   */
+  static edadMinimaValidator(min: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+      if (!control.value) {
+        return null; // &#x27;required&#x27; se encarga del campo vacío
+      }
+      const nacimiento &#x3D; new Date(control.value);
+      if (isNaN(nacimiento.getTime())) {
+        return { fechaInvalida: true };
+      }
+      const hoy &#x3D; new Date();
+      let edad &#x3D; hoy.getFullYear() - nacimiento.getFullYear();
+      const mes &#x3D; hoy.getMonth() - nacimiento.getMonth();
+      if (mes &lt; 0 || (mes &#x3D;&#x3D;&#x3D; 0 &amp;&amp; hoy.getDate() &lt; nacimiento.getDate())) {
+        edad--;
+      }
+      return edad &gt;&#x3D; min ? null : { edadMinima: true };
+    };
+  }
+
+  /**
+   * Validador a nivel de grupo: comprueba que la contraseña y su
+   * repetición coincidan.
+   *
+   * @param group Grupo del formulario que contiene ambos controles.
+   * @returns &#x60;null&#x60; si coinciden (o aún no se repite); en caso contrario
+   *   &#x60;{ contrasenasNoCoinciden: true }&#x60;.
+   */
+  static contrasenasIgualesValidator(group: AbstractControl): ValidationErrors | null {
+    const contrasena &#x3D; group.get(&#x27;contrasena&#x27;)?.value;
+    const repetir &#x3D; group.get(&#x27;repetirContrasena&#x27;)?.value;
+    if (!repetir) {
+      return null; // &#x27;required&#x27; se encarga del campo vacío
+    }
+    return contrasena &#x3D;&#x3D;&#x3D; repetir ? null : { contrasenasNoCoinciden: true };
+  }
+
+  /**
+   * Procesa el envío del formulario de registro.
+   *
+   * Si el formulario es inválido marca los campos como tocados para mostrar
+   * los errores. Si es válido, arma el objeto {@link Usuario}, lo registra
+   * mediante {@link DataService.registrarUsuario} y limpia el formulario.
+   */
+  onSubmit(): void {
+    if (this.registroForm.invalid) {
+      this.registroForm.markAllAsTouched(); // Muestra los errores en pantalla
+      return;
+    }
+
+    const datos &#x3D; this.registroForm.value;
+    const nuevoUsuario: Usuario &#x3D; {
+      nombre: datos.nombre,
+      usuario: datos.usuario,
+      email: datos.email,
+      contrasena: datos.contrasena,
+      tipoUsuario: &#x27;cliente&#x27;,
+      fechaNacimiento: datos.fechaNacimiento,
+      direccion: datos.direccion,
+    };
+    this.dataService.registrarUsuario(nuevoUsuario);
+    this.usuarioCreado &#x3D; datos.usuario;
+    this.registroExitoso &#x3D; true;
+    this.limpiar();
+  }
+
+  /**
+   * Restablece el formulario a su estado inicial vacío.
+   */
+  limpiar(): void {
+    this.registroForm.reset();
+  }
+
+  /**
+   * Alterna la visibilidad del campo de contraseña.
+   */
+  toggleContrasena(): void {
+    this.mostrarContrasena &#x3D; !this.mostrarContrasena;
+  }
+
+  /**
+   * Alterna la visibilidad del campo de repetir contraseña.
+   */
+  toggleRepetir(): void {
+    this.mostrarRepetir &#x3D; !this.mostrarRepetir;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;header class&#x3D;&quot;form-hero&quot; role&#x3D;&quot;banner&quot;&gt;
+  &lt;span class&#x3D;&quot;form-hero-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;📜&lt;/span&gt;
+  &lt;h1 class&#x3D;&quot;category-title&quot;&gt;Crear Cuenta&lt;/h1&gt;
+  &lt;p class&#x3D;&quot;category-subtitle&quot;&gt;Únete al gremio y acumula recompensas en cada compra&lt;/p&gt;
+&lt;/header&gt;
+
+&lt;main class&#x3D;&quot;form-wrapper&quot; id&#x3D;&quot;main&quot;&gt;
+
+  &lt;div *ngIf&#x3D;&quot;registroExitoso&quot; class&#x3D;&quot;success-banner&quot; role&#x3D;&quot;alert&quot; aria-live&#x3D;&quot;polite&quot;&gt;
+    &lt;span class&#x3D;&quot;banner-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;🎉&lt;/span&gt;
+    &lt;h3&gt;¡Bienvenido al Calabozo, aventurero!&lt;/h3&gt;
+    &lt;p&gt;Tu cuenta &lt;strong&gt;{{ usuarioCreado }}&lt;/strong&gt; ha sido creada con éxito.&lt;br&gt;
+      Pronto podrás canjear tus recompensas.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;form-card&quot;&gt;
+
+    &lt;form [formGroup]&#x3D;&quot;registroForm&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; novalidate&gt;
+
+      &lt;!-- Sección 1: Datos personales --&gt;
+      &lt;p class&#x3D;&quot;section-label&quot; style&#x3D;&quot;margin-bottom: var(--sp-md);&quot;&gt;Datos personales&lt;/p&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        &lt;div class&#x3D;&quot;col-12 campo-grupo&quot;&gt;
+          &lt;label for&#x3D;&quot;nombre&quot;&gt;Nombre completo &lt;span class&#x3D;&quot;req&quot; aria-hidden&#x3D;&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+          &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;nombre&quot; class&#x3D;&quot;campo-input&quot;
+                 placeholder&#x3D;&quot;Ej: Arthas Menethil&quot;
+                 formControlName&#x3D;&quot;nombre&quot; autocomplete&#x3D;&quot;name&quot;/&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;nombre&#x27;].touched &amp;&amp; f[&#x27;nombre&#x27;].errors?.[&#x27;required&#x27;]&quot;&gt;
+            El nombre es obligatorio.
+          &lt;/small&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+          &lt;label for&#x3D;&quot;usuario&quot;&gt;Nombre de usuario &lt;span class&#x3D;&quot;req&quot; aria-hidden&#x3D;&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+          &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;usuario&quot; class&#x3D;&quot;campo-input&quot;
+                 placeholder&#x3D;&quot;Ej: arthas99&quot;
+                 formControlName&#x3D;&quot;usuario&quot; autocomplete&#x3D;&quot;username&quot;/&gt;
+          &lt;span class&#x3D;&quot;campo-hint&quot;&gt;Sin espacios, mínimo 4 caracteres.&lt;/span&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;usuario&#x27;].touched &amp;&amp; f[&#x27;usuario&#x27;].errors?.[&#x27;required&#x27;]&quot;&gt;
+            El nombre de usuario es obligatorio.
+          &lt;/small&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;usuario&#x27;].touched &amp;&amp; f[&#x27;usuario&#x27;].errors?.[&#x27;minlength&#x27;]&quot;&gt;
+            Debe tener al menos 4 caracteres.
+          &lt;/small&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+          &lt;label for&#x3D;&quot;email&quot;&gt;Correo electrónico &lt;span class&#x3D;&quot;req&quot; aria-hidden&#x3D;&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+          &lt;input type&#x3D;&quot;email&quot; id&#x3D;&quot;email&quot; class&#x3D;&quot;campo-input&quot;
+                 placeholder&#x3D;&quot;tu@correo.cl&quot;
+                 formControlName&#x3D;&quot;email&quot; autocomplete&#x3D;&quot;email&quot;/&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;email&#x27;].touched &amp;&amp; f[&#x27;email&#x27;].errors?.[&#x27;required&#x27;]&quot;&gt;
+            El correo es obligatorio.
+          &lt;/small&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;email&#x27;].touched &amp;&amp; f[&#x27;email&#x27;].errors?.[&#x27;email&#x27;]&quot;&gt;
+            Ingresa un correo electrónico válido.
+          &lt;/small&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;hr class&#x3D;&quot;form-divider&quot; aria-hidden&#x3D;&quot;true&quot;/&gt;
+
+      &lt;!-- Sección 2: Contraseña --&gt;
+      &lt;p class&#x3D;&quot;section-label&quot; style&#x3D;&quot;margin-bottom: var(--sp-md);&quot;&gt;Contraseña de acceso&lt;/p&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+          &lt;label for&#x3D;&quot;clave&quot;&gt;Contraseña &lt;span class&#x3D;&quot;req&quot; aria-hidden&#x3D;&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+          &lt;div class&#x3D;&quot;input-pass-wrap&quot;&gt;
+            &lt;input [type]&#x3D;&quot;mostrarContrasena ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+                   id&#x3D;&quot;clave&quot; class&#x3D;&quot;campo-input&quot;
+                   placeholder&#x3D;&quot;••••••••&quot; maxlength&#x3D;&quot;18&quot;
+                   formControlName&#x3D;&quot;contrasena&quot; autocomplete&#x3D;&quot;new-password&quot;/&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-toggle-pass&quot; (click)&#x3D;&quot;toggleContrasena()&quot; aria-label&#x3D;&quot;Mostrar contraseña&quot;&gt;
+              &lt;span class&#x3D;&quot;icono-ojo&quot; aria-hidden&#x3D;&quot;true&quot;&gt;{{ mostrarContrasena ? &#x27;👁&#x27; : &#x27;🙈&#x27; }}&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+          &lt;span class&#x3D;&quot;campo-hint&quot;&gt;6–18 caracteres, 1 mayúscula y 1 número.&lt;/span&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;contrasena&#x27;].touched &amp;&amp; f[&#x27;contrasena&#x27;].errors?.[&#x27;required&#x27;]&quot;&gt;
+            La contraseña es obligatoria.
+          &lt;/small&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;contrasena&#x27;].touched &amp;&amp; f[&#x27;contrasena&#x27;].errors?.[&#x27;minlength&#x27;]&quot;&gt;
+            Debe tener al menos 6 caracteres.
+          &lt;/small&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;contrasena&#x27;].touched &amp;&amp; f[&#x27;contrasena&#x27;].errors?.[&#x27;maxlength&#x27;]&quot;&gt;
+            No puede superar los 18 caracteres.
+          &lt;/small&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;contrasena&#x27;].touched &amp;&amp; f[&#x27;contrasena&#x27;].errors?.[&#x27;contrasenaInsegura&#x27;]&quot;&gt;
+            Debe incluir al menos una mayúscula y un número.
+          &lt;/small&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+          &lt;label for&#x3D;&quot;repetir-clave&quot;&gt;Repetir contraseña &lt;span class&#x3D;&quot;req&quot; aria-hidden&#x3D;&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+          &lt;div class&#x3D;&quot;input-pass-wrap&quot;&gt;
+            &lt;input [type]&#x3D;&quot;mostrarRepetir ? &#x27;text&#x27; : &#x27;password&#x27;&quot;
+                   id&#x3D;&quot;repetir-clave&quot; class&#x3D;&quot;campo-input&quot;
+                   placeholder&#x3D;&quot;••••••••&quot; maxlength&#x3D;&quot;18&quot;
+                   formControlName&#x3D;&quot;repetirContrasena&quot; autocomplete&#x3D;&quot;new-password&quot;/&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-toggle-pass&quot; (click)&#x3D;&quot;toggleRepetir()&quot; aria-label&#x3D;&quot;Mostrar contraseña&quot;&gt;
+              &lt;span class&#x3D;&quot;icono-ojo&quot; aria-hidden&#x3D;&quot;true&quot;&gt;{{ mostrarRepetir ? &#x27;👁&#x27; : &#x27;🙈&#x27; }}&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;repetirContrasena&#x27;].touched &amp;&amp; f[&#x27;repetirContrasena&#x27;].errors?.[&#x27;required&#x27;]&quot;&gt;
+            Debes repetir la contraseña.
+          &lt;/small&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot;
+                 *ngIf&#x3D;&quot;f[&#x27;repetirContrasena&#x27;].touched &amp;&amp; registroForm.errors?.[&#x27;contrasenasNoCoinciden&#x27;]&quot;&gt;
+            Las contraseñas no coinciden.
+          &lt;/small&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;hr class&#x3D;&quot;form-divider&quot; aria-hidden&#x3D;&quot;true&quot;/&gt;
+
+      &lt;!-- Sección 3: Datos adicionales --&gt;
+      &lt;p class&#x3D;&quot;section-label&quot; style&#x3D;&quot;margin-bottom: var(--sp-md);&quot;&gt;Datos adicionales&lt;/p&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+          &lt;label for&#x3D;&quot;nacimiento&quot;&gt;Fecha de nacimiento &lt;span class&#x3D;&quot;req&quot; aria-hidden&#x3D;&quot;true&quot;&gt;*&lt;/span&gt;&lt;/label&gt;
+          &lt;input type&#x3D;&quot;date&quot; id&#x3D;&quot;nacimiento&quot; class&#x3D;&quot;campo-input&quot;
+                 formControlName&#x3D;&quot;fechaNacimiento&quot; autocomplete&#x3D;&quot;bday&quot;/&gt;
+          &lt;span class&#x3D;&quot;campo-hint&quot;&gt;Debes tener al menos 13 años.&lt;/span&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;fechaNacimiento&#x27;].touched &amp;&amp; f[&#x27;fechaNacimiento&#x27;].errors?.[&#x27;required&#x27;]&quot;&gt;
+            La fecha de nacimiento es obligatoria.
+          &lt;/small&gt;
+          &lt;small class&#x3D;&quot;text-danger&quot; *ngIf&#x3D;&quot;f[&#x27;fechaNacimiento&#x27;].touched &amp;&amp; f[&#x27;fechaNacimiento&#x27;].errors?.[&#x27;edadMinima&#x27;]&quot;&gt;
+            Debes tener al menos 13 años para registrarte.
+          &lt;/small&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;col-12 col-md-6 campo-grupo&quot;&gt;
+          &lt;label for&#x3D;&quot;direccion&quot;&gt;
+            Dirección de despacho
+            &lt;span class&#x3D;&quot;campo-opcional-tag&quot; aria-label&#x3D;&quot;campo opcional&quot;&gt;Opcional&lt;/span&gt;
+          &lt;/label&gt;
+          &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;direccion&quot; class&#x3D;&quot;campo-input&quot;
+                 placeholder&#x3D;&quot;Calle, número, ciudad…&quot;
+                 formControlName&#x3D;&quot;direccion&quot; autocomplete&#x3D;&quot;street-address&quot;/&gt;
+          &lt;span class&#x3D;&quot;campo-hint&quot;&gt;Puedes completarla luego desde tu perfil.&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;p style&#x3D;&quot;font-size:0.78rem; color:var(--clr-text-muted); margin-top:var(--sp-sm);&quot;&gt;
+        &lt;span style&#x3D;&quot;color:var(--clr-amber);&quot;&gt;*&lt;/span&gt; Campos obligatorios
+      &lt;/p&gt;
+
+      &lt;div class&#x3D;&quot;form-actions&quot;&gt;
+        &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn-submit&quot;&gt;⚔ Crear mi cuenta&lt;/button&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-clear&quot; (click)&#x3D;&quot;limpiar()&quot;&gt;↺ Limpiar&lt;/button&gt;
+      &lt;/div&gt;
+
+    &lt;/form&gt;
+
+    &lt;p class&#x3D;&quot;form-footer-link&quot;&gt;
+      ¿Ya tienes cuenta? &lt;a routerLink&#x3D;&quot;/login&quot;&gt;Iniciar sesión&lt;/a&gt;
+    &lt;/p&gt;
+
+  &lt;/div&gt;
+
+&lt;/main&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><header class="form-hero" role="banner">  <span class="form-hero-icon" aria-hidden="true">📜</span>  <h1 class="category-title">Crear Cuenta</h1>  <p class="category-subtitle">Únete al gremio y acumula recompensas en cada compra</p></header><main class="form-wrapper" id="main">  <div *ngIf="registroExitoso" class="success-banner" role="alert" aria-live="polite">    <span class="banner-icon" aria-hidden="true">🎉</span>    <h3>¡Bienvenido al Calabozo, aventurero!</h3>    <p>Tu cuenta <strong>{{ usuarioCreado }}</strong> ha sido creada con éxito.<br>      Pronto podrás canjear tus recompensas.</p>  </div>  <div class="form-card">    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" novalidate>      <!-- Sección 1: Datos personales -->      <p class="section-label" style="margin-bottom: var(--sp-md);">Datos personales</p>      <div class="row">        <div class="col-12 campo-grupo">          <label for="nombre">Nombre completo <span class="req" aria-hidden="true">*</span></label>          <input type="text" id="nombre" class="campo-input"                 placeholder="Ej: Arthas Menethil"                 formControlName="nombre" autocomplete="name"/>          <small class="text-danger" *ngIf="f[\'nombre\'].touched && f[\'nombre\'].errors?.[\'required\']">            El nombre es obligatorio.          </small>        </div>        <div class="col-12 col-md-6 campo-grupo">          <label for="usuario">Nombre de usuario <span class="req" aria-hidden="true">*</span></label>          <input type="text" id="usuario" class="campo-input"                 placeholder="Ej: arthas99"                 formControlName="usuario" autocomplete="username"/>          <span class="campo-hint">Sin espacios, mínimo 4 caracteres.</span>          <small class="text-danger" *ngIf="f[\'usuario\'].touched && f[\'usuario\'].errors?.[\'required\']">            El nombre de usuario es obligatorio.          </small>          <small class="text-danger" *ngIf="f[\'usuario\'].touched && f[\'usuario\'].errors?.[\'minlength\']">            Debe tener al menos 4 caracteres.          </small>        </div>        <div class="col-12 col-md-6 campo-grupo">          <label for="email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>          <input type="email" id="email" class="campo-input"                 placeholder="tu@correo.cl"                 formControlName="email" autocomplete="email"/>          <small class="text-danger" *ngIf="f[\'email\'].touched && f[\'email\'].errors?.[\'required\']">            El correo es obligatorio.          </small>          <small class="text-danger" *ngIf="f[\'email\'].touched && f[\'email\'].errors?.[\'email\']">            Ingresa un correo electrónico válido.          </small>        </div>      </div>      <hr class="form-divider" aria-hidden="true"/>      <!-- Sección 2: Contraseña -->      <p class="section-label" style="margin-bottom: var(--sp-md);">Contraseña de acceso</p>      <div class="row">        <div class="col-12 col-md-6 campo-grupo">          <label for="clave">Contraseña <span class="req" aria-hidden="true">*</span></label>          <div class="input-pass-wrap">            <input [type]="mostrarContrasena ? \'text\' : \'password\'"                   id="clave" class="campo-input"                   placeholder="••••••••" maxlength="18"                   formControlName="contrasena" autocomplete="new-password"/>            <button type="button" class="btn-toggle-pass" (click)="toggleContrasena()" aria-label="Mostrar contraseña">              <span class="icono-ojo" aria-hidden="true">{{ mostrarContrasena ? \'👁\' : \'🙈\' }}</span>            </button>          </div>          <span class="campo-hint">6–18 caracteres, 1 mayúscula y 1 número.</span>          <small class="text-danger" *ngIf="f[\'contrasena\'].touched && f[\'contrasena\'].errors?.[\'required\']">            La contraseña es obligatoria.          </small>          <small class="text-danger" *ngIf="f[\'contrasena\'].touched && f[\'contrasena\'].errors?.[\'minlength\']">            Debe tener al menos 6 caracteres.          </small>          <small class="text-danger" *ngIf="f[\'contrasena\'].touched && f[\'contrasena\'].errors?.[\'maxlength\']">            No puede superar los 18 caracteres.          </small>          <small class="text-danger" *ngIf="f[\'contrasena\'].touched && f[\'contrasena\'].errors?.[\'contrasenaInsegura\']">            Debe incluir al menos una mayúscula y un número.          </small>        </div>        <div class="col-12 col-md-6 campo-grupo">          <label for="repetir-clave">Repetir contraseña <span class="req" aria-hidden="true">*</span></label>          <div class="input-pass-wrap">            <input [type]="mostrarRepetir ? \'text\' : \'password\'"                   id="repetir-clave" class="campo-input"                   placeholder="••••••••" maxlength="18"                   formControlName="repetirContrasena" autocomplete="new-password"/>            <button type="button" class="btn-toggle-pass" (click)="toggleRepetir()" aria-label="Mostrar contraseña">              <span class="icono-ojo" aria-hidden="true">{{ mostrarRepetir ? \'👁\' : \'🙈\' }}</span>            </button>          </div>          <small class="text-danger" *ngIf="f[\'repetirContrasena\'].touched && f[\'repetirContrasena\'].errors?.[\'required\']">            Debes repetir la contraseña.          </small>          <small class="text-danger"                 *ngIf="f[\'repetirContrasena\'].touched && registroForm.errors?.[\'contrasenasNoCoinciden\']">            Las contraseñas no coinciden.          </small>        </div>      </div>      <hr class="form-divider" aria-hidden="true"/>      <!-- Sección 3: Datos adicionales -->      <p class="section-label" style="margin-bottom: var(--sp-md);">Datos adicionales</p>      <div class="row">        <div class="col-12 col-md-6 campo-grupo">          <label for="nacimiento">Fecha de nacimiento <span class="req" aria-hidden="true">*</span></label>          <input type="date" id="nacimiento" class="campo-input"                 formControlName="fechaNacimiento" autocomplete="bday"/>          <span class="campo-hint">Debes tener al menos 13 años.</span>          <small class="text-danger" *ngIf="f[\'fechaNacimiento\'].touched && f[\'fechaNacimiento\'].errors?.[\'required\']">            La fecha de nacimiento es obligatoria.          </small>          <small class="text-danger" *ngIf="f[\'fechaNacimiento\'].touched && f[\'fechaNacimiento\'].errors?.[\'edadMinima\']">            Debes tener al menos 13 años para registrarte.          </small>        </div>        <div class="col-12 col-md-6 campo-grupo">          <label for="direccion">            Dirección de despacho            <span class="campo-opcional-tag" aria-label="campo opcional">Opcional</span>          </label>          <input type="text" id="direccion" class="campo-input"                 placeholder="Calle, número, ciudad…"                 formControlName="direccion" autocomplete="street-address"/>          <span class="campo-hint">Puedes completarla luego desde tu perfil.</span>        </div>      </div>      <p style="font-size:0.78rem; color:var(--clr-text-muted); margin-top:var(--sp-sm);">        <span style="color:var(--clr-amber);">*</span> Campos obligatorios      </p>      <div class="form-actions">        <button type="submit" class="btn-submit">⚔ Crear mi cuenta</button>        <button type="button" class="btn-clear" (click)="limpiar()">↺ Limpiar</button>      </div>    </form>    <p class="form-footer-link">      ¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a>    </p>  </div></main></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DetalleJuegoComponent', 'selector': 'app-detalle-juego'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ListaJuegosComponent', 'selector': 'app-lista-juegos'},{'name': 'ListaUsuariosComponent', 'selector': 'app-lista-usuarios'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'RecuperarComponent', 'selector': 'app-recuperar'},{'name': 'RegistroComponent', 'selector': 'app-registro'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RegistroComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RegistroComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

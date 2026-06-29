@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 
+/**
+ * Componente de pie de página.
+ *
+ * Componente de presentación sin lógica: muestra la marca y el aviso de
+ * derechos reservados mediante una plantilla en línea.
+ */
 @Component({
   selector: 'app-footer',
   template: `

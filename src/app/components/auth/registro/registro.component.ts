@@ -13,6 +13,15 @@ import {
   ValidatorFn,
 } from '@angular/forms'; // Formularios reactivos
 
+/**
+ * Componente de registro de nuevos usuarios.
+ *
+ * Usa formularios reactivos con validaciones a nivel de campo y de grupo:
+ * exige nombre, usuario, correo válido, contraseña segura (longitud,
+ * mayúscula y número), confirmación de contraseña coincidente y una edad
+ * mínima a partir de la fecha de nacimiento. Al validar correctamente,
+ * delega el alta en {@link DataService}.
+ */
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -21,13 +30,25 @@ import {
 })
 export class RegistroComponent {
 
+  /** Formulario reactivo con todos los campos y validadores del registro. */
   registroForm: FormGroup;
 
+  /** Controla la visibilidad del campo de contraseña. */
   mostrarContrasena: boolean = false;
+  /** Controla la visibilidad del campo de repetir contraseña. */
   mostrarRepetir: boolean = false;
+  /** Indica si el último registro se completó con éxito (muestra el aviso). */
   registroExitoso: boolean = false;
+  /** Nombre de usuario recién creado, usado en el mensaje de éxito. */
   usuarioCreado: string = '';
 
+  /**
+   * Construye el formulario reactivo y registra todos sus validadores.
+   *
+   * @param fb Constructor de formularios reactivos.
+   * @param dataService Servicio donde se persiste el nuevo usuario.
+   * @param router Router de la aplicación (navegación posterior al alta).
+   */
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
@@ -55,12 +76,23 @@ export class RegistroComponent {
     );
   }
 
-  // Acceso rápido a los controles desde el HTML
+  /**
+   * Acceso rápido a los controles del formulario desde la plantilla HTML.
+   *
+   * @returns El diccionario de controles de {@link registroForm}.
+   */
   get f() {
     return this.registroForm.controls;
   }
 
-  // Validador: la contraseña debe tener al menos una mayúscula y al menos un número
+  /**
+   * Validador de contraseña segura: exige al menos una letra mayúscula y
+   * al menos un número. El requisito de longitud lo cubren otros
+   * validadores (`minLength`/`maxLength`).
+   *
+   * @param control Control de la contraseña a validar.
+   * @returns `null` si es válida; `{ contrasenaInsegura: true }` si no.
+   */
   static contrasenaSeguraValidator(control: AbstractControl): ValidationErrors | null {
     const valor: string = control.value || '';
     if (!valor) {
@@ -71,7 +103,15 @@ export class RegistroComponent {
     return tieneMayuscula && tieneNumero ? null : { contrasenaInsegura: true };
   }
 
-  // Validador con parámetro: la persona debe tener al menos 'min' años
+  /**
+   * Crea un validador que exige una edad mínima a partir de la fecha de
+   * nacimiento indicada en el control.
+   *
+   * @param min Edad mínima requerida en años.
+   * @returns Una {@link ValidatorFn} que devuelve `null` si cumple la edad,
+   *   `{ edadMinima: true }` si es menor, o `{ fechaInvalida: true }` si la
+   *   fecha no es válida.
+   */
   static edadMinimaValidator(min: number): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) {
@@ -91,7 +131,14 @@ export class RegistroComponent {
     };
   }
 
-  // Validador a nivel de grupo: las dos contraseñas deben ser iguales
+  /**
+   * Validador a nivel de grupo: comprueba que la contraseña y su
+   * repetición coincidan.
+   *
+   * @param group Grupo del formulario que contiene ambos controles.
+   * @returns `null` si coinciden (o aún no se repite); en caso contrario
+   *   `{ contrasenasNoCoinciden: true }`.
+   */
   static contrasenasIgualesValidator(group: AbstractControl): ValidationErrors | null {
     const contrasena = group.get('contrasena')?.value;
     const repetir = group.get('repetirContrasena')?.value;
@@ -101,6 +148,13 @@ export class RegistroComponent {
     return contrasena === repetir ? null : { contrasenasNoCoinciden: true };
   }
 
+  /**
+   * Procesa el envío del formulario de registro.
+   *
+   * Si el formulario es inválido marca los campos como tocados para mostrar
+   * los errores. Si es válido, arma el objeto {@link Usuario}, lo registra
+   * mediante {@link DataService.registrarUsuario} y limpia el formulario.
+   */
   onSubmit(): void {
     if (this.registroForm.invalid) {
       this.registroForm.markAllAsTouched(); // Muestra los errores en pantalla
@@ -123,14 +177,23 @@ export class RegistroComponent {
     this.limpiar();
   }
 
+  /**
+   * Restablece el formulario a su estado inicial vacío.
+   */
   limpiar(): void {
     this.registroForm.reset();
   }
 
+  /**
+   * Alterna la visibilidad del campo de contraseña.
+   */
   toggleContrasena(): void {
     this.mostrarContrasena = !this.mostrarContrasena;
   }
 
+  /**
+   * Alterna la visibilidad del campo de repetir contraseña.
+   */
   toggleRepetir(): void {
     this.mostrarRepetir = !this.mostrarRepetir;
   }

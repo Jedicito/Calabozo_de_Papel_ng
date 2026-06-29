@@ -14,6 +14,13 @@ import { RecuperarComponent } from './components/auth/recuperar/recuperar.compon
 // Admin
 import { ListaUsuariosComponent } from './components/admin/lista-usuarios/lista-usuarios.component';
 
+/**
+ * Tabla de rutas de la aplicación.
+ *
+ * Define las rutas públicas (tienda, login, registro, recuperar), las de
+ * usuario autenticado (perfil) y la del mantenedor de administración
+ * (`admin/usuarios`). La ruta comodín redirige al inicio.
+ */
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'categoria/:nombre', component: ListaJuegosComponent },

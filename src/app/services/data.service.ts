@@ -2,11 +2,20 @@ import { Injectable } from '@angular/core';
 import { Usuario } from '../models/usuario.model';
 import { Juego, Categoria } from '../models/juego.model';
 
+/**
+ * Servicio central de datos de la aplicación.
+ *
+ * Actúa como una base de datos en memoria: mantiene las colecciones de
+ * usuarios, juegos y categorías, y expone métodos de consulta y
+ * mantenimiento sobre ellas. Al estar provisto en la raíz
+ * (`providedIn: 'root'`) es un singleton compartido por toda la aplicación.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
+  /** Colección en memoria de usuarios registrados (precargada). */
   private usuarios: Usuario[] = [
     {
       nombre: 'Administrador',
@@ -40,6 +49,7 @@ export class DataService {
     }
   ];
 
+  /** Catálogo en memoria de juegos disponibles en la tienda. */
   private juegos: Juego[] = [
     // Estrategia
     {
@@ -155,6 +165,7 @@ export class DataService {
     }
   ];
 
+  /** Colección en memoria de categorías del catálogo. */
   private categorias: Categoria[] = [
     {
       slug: 'estrategia',
@@ -190,39 +201,91 @@ export class DataService {
     }
   ];
 
+  /**
+   * Devuelve la lista completa de usuarios registrados.
+   *
+   * @returns Arreglo con todos los {@link Usuario} actualmente en memoria.
+   */
   getUsuarios(): Usuario[] {
     return this.usuarios;
   }
 
+  /**
+   * Devuelve la lista completa de juegos del catálogo.
+   *
+   * @returns Arreglo con todos los {@link Juego} disponibles.
+   */
   getJuegos(): Juego[] {
     return this.juegos;
   }
 
+  /**
+   * Busca un juego por su identificador.
+   *
+   * @param id Identificador numérico del juego a buscar.
+   * @returns El {@link Juego} correspondiente, o `undefined` si no existe.
+   */
   getJuegoById(id: number): Juego | undefined {
     return this.juegos.find(j => j.id === id);
   }
 
+  /**
+   * Obtiene todos los juegos que pertenecen a una categoría.
+   *
+   * @param categoria Slug de la categoría (ej. `'estrategia'`).
+   * @returns Arreglo de {@link Juego} de esa categoría (vacío si no hay).
+   */
   getJuegosPorCategoria(categoria: string): Juego[] {
     return this.juegos.filter(j => j.categoria === categoria);
   }
 
+  /**
+   * Devuelve la lista completa de categorías del catálogo.
+   *
+   * @returns Arreglo con todas las {@link Categoria} disponibles.
+   */
   getCategorias(): Categoria[] {
     return this.categorias;
   }
 
+  /**
+   * Busca una categoría por su slug.
+   *
+   * @param slug Identificador legible de la categoría (ej. `'cartas'`).
+   * @returns La {@link Categoria} correspondiente, o `undefined` si no existe.
+   */
   getCategoriaBySlug(slug: string): Categoria | undefined {
     return this.categorias.find(c => c.slug === slug);
   }
 
+  /**
+   * Registra un nuevo usuario en la colección en memoria.
+   *
+   * Asigna automáticamente la fecha de registro con la fecha actual antes de
+   * agregarlo a la lista.
+   *
+   * @param usuario Datos del {@link Usuario} a registrar.
+   */
   registrarUsuario(usuario: Usuario): void {
     usuario.fechaRegistro = new Date().toISOString().split('T')[0];
     this.usuarios.push(usuario);
   }
 
+  /**
+   * Elimina un usuario de la colección a partir de su nombre de usuario.
+   *
+   * @param username Nombre de usuario de la cuenta a eliminar.
+   */
   eliminarUsuario(username: string): void {
     this.usuarios = this.usuarios.filter(u => u.usuario !== username);
   }
 
+  /**
+   * Da formato de moneda chilena (CLP) a un precio numérico.
+   *
+   * @param precio Precio sin formato (ej. `34990`).
+   * @returns Cadena con separador de miles y prefijo `$` (ej. `'$34.990'`).
+   */
   formatearPrecio(precio: number): string {
     return '$' + precio.toLocaleString('es-CL');
   }

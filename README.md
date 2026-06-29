@@ -44,6 +44,26 @@ To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use th
 ng test
 ```
 
+El proyecto incluye pruebas unitarias para los servicios (`AuthService`, `DataService`)
+y para los componentes (`AppComponent`, `RegistroComponent`), ejecutándose con la misma
+API de `describe`/`it`/`expect` de Jasmine sobre el runner Vitest.
+
+## Documentación del código (Compodoc)
+
+Todo el código fuente está documentado con comentarios JSDoc. Para generar el sitio de
+documentación navegable con [Compodoc](https://compodoc.app/), ejecuta:
+
+```bash
+npm run compodoc
+```
+
+La documentación se genera en la carpeta `documentation/`. Para generarla y abrirla en un
+servidor local automáticamente:
+
+```bash
+npm run compodoc:serve
+```
+
 ## Running end-to-end tests
 
 For end-to-end (e2e) testing, run:
